@@ -1,0 +1,4871 @@
+<!--
+================================================================================
+NOCTURNE — FALL '26 "THE BLOOD MOON DROP"
+UNIQUE EDITORIAL PHOTOGRAPHY REGISTRY (47 NON-DUPLICATED ASSETS)
+================================================================================
+Strict Zero-Duplicate Policy: Every Hero, Mega-Menu, Category Arch (7),
+Featured Collection (4), Product SKU (24: 10 Trending Clothes, 6 Footwear,
+8 Jewelry), Lookbook Bento (5), and UGC Fit (4) uses a unique photograph URL.
+================================================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOCTURNE — FALL '26 | The Blood Moon Drop</title>
+  <meta name="description" content="NOCTURNE Fall '26 — Dress like the night owes you. Trending gothic streetwear, cathedral footwear, and gilded jewelry." />
+
+  <!-- Google Fonts: Syne 800, Cormorant Garamond Italic, DM Sans, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=JetBrains+Mono:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+
+  <!-- Pinned CDN Libraries (GSAP 3.12.5, ScrollTrigger 3.12.5, Lenis 1.1.14; Three.js 0.160.0 via ES Module) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js" defer></script>
+
+  <style>
+    :root {
+      --black: #0A0A0A;
+      --ink: #141214;
+      --white: #F5F2EC;
+      --vampire-red: #8A0F1E;
+      --blood: #5E0A15;
+      --red-glow: #E01E37;
+      --gold: #D4AF37;
+      --gold-soft: #E8C96B;
+      --gold-deep: #A8862A;
+      --gold-grad: linear-gradient(135deg, var(--gold-deep) 0%, var(--gold-soft) 48%, var(--gold) 100%);
+      --font-display: 'Syne', sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+      --bar-h: 36px;
+      --nav-h: 72px;
+      --radius-sharp: 2px;
+      --radius-arch: 999px 999px 2px 2px;
+      --hairline-gold: rgba(212, 175, 55, 0.28);
+      --hairline-white: rgba(245, 242, 236, 0.14);
+      --glass-bg: rgba(10, 10, 10, 0.78);
+    }
+
+    /* Product Card with Realistic 3D Perspective, Floating Depth & Specular Glare */
+    .product-card-scene {
+      perspective: 1200px;
+      height: 100%;
+    }
+
+    .product-card {
+      position: relative;
+      height: 100%;
+      background: var(--ink);
+      border: 1px solid var(--hairline-white);
+      border-radius: var(--radius-sharp);
+      display: flex;
+      flex-direction: column;
+      transform-style: preserve-3d;
+      transition: transform 0.18s ease-out, border-color 0.3s ease, box-shadow 0.35s ease;
+      will-change: transform;
+    }
+
+    .product-card.is-floating-3d {
+      animation: card-float-3d 6.5s ease-in-out infinite;
+    }
+
+    .product-card.is-floating-3d:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes card-float-3d {
+      0%, 100% { transform: rotateX(1.2deg) rotateY(-1.4deg) translateY(0px); }
+      50% { transform: rotateX(-1.4deg) rotateY(1.6deg) translateY(-5px); }
+    }
+
+    .product-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 26px 54px rgba(0, 0, 0, 0.78), 0 0 28px rgba(138, 15, 30, 0.28);
+    }
+
+    .card-glare {
+      position: absolute;
+      inset: 0;
+      z-index: 6;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      background:
+        radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(232, 201, 107, 0.24) 0%, rgba(224, 30, 55, 0.14) 32%, transparent 65%);
+      mix-blend-mode: screen;
+    }
+
+    .product-card:hover .card-glare {
+      opacity: 1;
+    }
+
+    .product-media {
+      position: relative;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      background: #0F0D0F;
+      transform-style: preserve-3d;
+    }
+
+    .product-media img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.75s var(--ease-editorial), filter 0.55s ease;
+    }
+
+    /* Realistic 3D zoom & rim-light shift on hover (zero duplicate image swap) */
+    .product-card:hover .product-media .img-front {
+      transform: scale(1.09) translateZ(12px);
+      filter: contrast(1.14) saturate(0.92) brightness(0.98);
+    }
+
+    .product-rim-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      box-shadow: inset 0 0 36px rgba(224, 30, 55, 0.42), inset 0 0 14px rgba(212, 175, 55, 0.32);
+    }
+
+    .product-card:hover .product-rim-overlay {
+      opacity: 1;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 8;
+      padding: 4px 10px;
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: var(--vampire-red);
+      color: var(--white);
+      border: 1px solid var(--red-glow);
+      transform: translateZ(26px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+    }
+
+    .product-badge.is-limited,
+    .product-badge.is-trending {
+      background: rgba(10, 10, 10, 0.9);
+      border-color: var(--gold);
+      color: var(--gold-soft);
+    }
+
+    .wishlist-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 9;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(10, 10, 10, 0.78);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--hairline-white);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      transform: translateZ(28px);
+      transition: all 0.25s ease;
+    }
+
+    .wishlist-btn:hover,
+    .wishlist-btn.is-active {
+      border-color: var(--red-glow);
+      color: var(--red-glow);
+      background: rgba(94, 10, 21, 0.55);
+    }
+
+    .wishlist-btn.is-active svg {
+      fill: var(--red-glow);
+    }
+
+    /* Elevated 3D Floating Quick-Add & 3D Inspect Overlay */
+    .product-hover-bar {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      z-index: 9;
+      background: rgba(10, 10, 10, 0.9);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--hairline-gold);
+      padding: 10px;
+      transform: translateY(118%) translateZ(34px);
+      opacity: 0;
+      transition: transform 0.35s var(--ease-editorial), opacity 0.3s ease;
+    }
+
+    .product-card:hover .product-hover-bar,
+    .product-card:focus-within .product-hover-bar {
+      transform: translateY(0) translateZ(34px);
+      opacity: 1;
+    }
+
+    .hover-action-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 6px;
+    }
+
+    .inspect-3d-btn {
+      padding: 8px 10px;
+      border: 1px solid var(--gold);
+      background: rgba(212, 175, 55, 0.12);
+      color: var(--gold-soft);
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .inspect-3d-btn:hover {
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background-color: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body.no-scroll {
+      overflow: hidden;
+    }
+
+    ::selection {
+      background: var(--vampire-red);
+      color: var(--white);
+    }
+
+    /* Gold focus rings for accessibility */
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Editorial image grading & blur-up */
+    .editorial-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: contrast(1.08) saturate(0.82) brightness(0.9);
+      transition: transform 0.8s var(--ease-editorial), filter 0.6s ease, opacity 0.6s ease;
+      background-color: var(--ink);
+    }
+
+    .editorial-img.is-loading {
+      filter: blur(12px) contrast(1.05) saturate(0.7);
+      opacity: 0.6;
+    }
+
+    .img-grade-wrap {
+      position: relative;
+      overflow: hidden;
+      background: var(--ink);
+    }
+
+    .img-grade-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(10, 10, 10, 0.08) 0%, rgba(94, 10, 21, 0.16) 65%, rgba(10, 10, 10, 0.68) 100%);
+      mix-blend-mode: multiply;
+    }
+
+    /* Typography Helpers */
+    .font-display {
+      font-family: var(--font-display);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      line-height: 0.92;
+    }
+
+    .font-serif-italic {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: -0.01em;
+    }
+
+    .font-mono {
+      font-family: var(--font-mono);
+    }
+
+    .text-gold-foil {
+      background: var(--gold-grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .text-outline {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(245, 242, 236, 0.42);
+    }
+
+    .text-outline-gold {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(212, 175, 55, 0.55);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding-left: clamp(16px, 4vw, 48px);
+      padding-right: clamp(16px, 4vw, 48px);
+    }
+
+    .section-pad {
+      padding-top: clamp(64px, 9vw, 128px);
+      padding-bottom: clamp(64px, 9vw, 128px);
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .section-eyebrow::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--vampire-red);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: clamp(2.25rem, 6vw, 5.25rem);
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+    }
+
+    /* Animated hairline underline */
+    .u-link {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 4px;
+    }
+
+    .u-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--gold-grad);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.45s var(--ease-editorial);
+    }
+
+    .u-link:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 30px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      border-radius: var(--radius-sharp);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s var(--ease-editorial), box-shadow 0.35s ease, border-color 0.3s ease, background 0.3s ease;
+      min-height: 48px;
+    }
+
+    .btn-red {
+      background: var(--vampire-red);
+      color: var(--white);
+      border: 1px solid var(--red-glow);
+      box-shadow: 0 0 24px rgba(138, 15, 30, 0.35);
+    }
+
+    .btn-red:hover {
+      background: var(--red-glow);
+      box-shadow: 0 0 36px rgba(224, 30, 55, 0.55);
+    }
+
+    .btn-gold-outline {
+      background: rgba(10, 10, 10, 0.45);
+      color: var(--gold-soft);
+      border: 1px solid var(--gold);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-gold-outline:hover {
+      background: rgba(212, 175, 55, 0.14);
+      border-color: var(--gold-soft);
+      box-shadow: 0 0 24px rgba(212, 175, 55, 0.25);
+    }
+
+    /* ==========================================================================
+       2. GLOBAL FILM GRAIN, VIGNETTE, CUSTOM CURSOR & PRELOADER
+       ========================================================================== */
+    .film-grain {
+      position: fixed;
+      inset: 0;
+      z-index: 900;
+      pointer-events: none;
+      opacity: 0.045;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    .global-vignette {
+      position: fixed;
+      inset: 0;
+      z-index: 899;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, transparent 55%, rgba(10, 10, 10, 0.72) 100%);
+    }
+
+    /* Custom Cursor (Desktop Only) */
+    #cursor-trail-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 950;
+      pointer-events: none;
+      display: none;
+    }
+
+    .custom-cursor-dot,
+    .custom-cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 960;
+      transform: translate(-50%, -50%);
+      display: none;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      body.has-custom-cursor,
+      body.has-custom-cursor a,
+      body.has-custom-cursor button {
+        cursor: none;
+      }
+      #cursor-trail-canvas,
+      .custom-cursor-dot,
+      .custom-cursor-ring {
+        display: block;
+      }
+    }
+
+    .custom-cursor-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold-soft);
+      box-shadow: 0 0 10px var(--gold);
+    }
+
+    .custom-cursor-ring {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1.5px solid var(--red-glow);
+      mix-blend-mode: difference;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: width 0.28s var(--ease-editorial), height 0.28s var(--ease-editorial), background 0.28s ease, border-color 0.28s ease;
+    }
+
+    .custom-cursor-ring span {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      color: var(--white);
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity 0.2s ease, transform 0.25s ease;
+    }
+
+    .custom-cursor-ring.is-view {
+      width: 76px;
+      height: 76px;
+      background: rgba(138, 15, 30, 0.85);
+      border-color: var(--gold);
+      mix-blend-mode: normal;
+    }
+
+    .custom-cursor-ring.is-view span {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .custom-cursor-ring.is-pointer {
+      width: 48px;
+      height: 48px;
+      border-color: var(--gold);
+    }
+
+    /* Preloader */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: var(--black);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .preloader-curtain {
+      position: absolute;
+      inset: 0;
+      background: var(--vampire-red);
+      transform: translateY(100%);
+      z-index: 2;
+    }
+
+    .preloader-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .preloader-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2.5rem, 9vw, 6.5rem);
+      letter-spacing: 0.14em;
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .preloader-logo span {
+      display: inline-block;
+      transform: translateY(115%);
+      background: var(--gold-grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .preloader-meta {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.22em;
+      color: rgba(245, 242, 236, 0.65);
+    }
+
+    .preloader-count {
+      font-size: 1.35rem;
+      color: var(--gold-soft);
+      min-width: 56px;
+      text-align: right;
+    }
+
+    /* ==========================================================================
+       3. SECTION 1: ANNOUNCEMENT BAR
+       ========================================================================== */
+    .announcement-bar {
+      height: var(--bar-h);
+      background: var(--blood);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      position: relative;
+      z-index: 120;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee-scroll 28s linear infinite;
+    }
+
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+
+    .marquee-item {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white);
+      padding-right: 48px;
+      white-space: nowrap;
+    }
+
+    .marquee-item strong {
+      color: var(--gold-soft);
+      font-weight: 600;
+    }
+
+    @keyframes marquee-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ==========================================================================
+       4. SECTION 2: STICKY GLASS NAVBAR & MEGA MENU
+       ========================================================================== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 110;
+      height: var(--nav-h);
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--hairline-gold);
+      transition: background 0.3s ease;
+    }
+
+    .nav-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+      letter-spacing: 0.16em;
+      background: var(--gold-grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    @media (min-width: 1024px) {
+      .nav-links {
+        display: flex;
+      }
+    }
+
+    .nav-link {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(245, 242, 236, 0.85);
+      padding: 8px 0;
+      position: relative;
+      transition: color 0.25s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--gold-soft);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-icon-btn {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+      border-radius: var(--radius-sharp);
+      color: var(--white);
+      transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+    }
+
+    .nav-icon-btn:hover {
+      border-color: var(--hairline-gold);
+      color: var(--gold-soft);
+      background: rgba(212, 175, 55, 0.08);
+    }
+
+    .nav-badge {
+      position: absolute;
+      top: 5px;
+      right: 4px;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 4px;
+      border-radius: 999px;
+      background: var(--red-glow);
+      color: var(--white);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mobile-menu-btn {
+      display: inline-flex;
+    }
+
+    @media (min-width: 1024px) {
+      .mobile-menu-btn {
+        display: none;
+      }
+    }
+
+    /* Hover Mega-Menu */
+    .mega-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: rgba(10, 10, 10, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--hairline-gold);
+      padding: 40px 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: opacity 0.32s var(--ease-editorial), transform 0.32s var(--ease-editorial), visibility 0.32s;
+      z-index: 105;
+    }
+
+    .mega-menu.is-open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .mega-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.2fr 1.2fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .mega-col h4 {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--hairline-white);
+    }
+
+    .mega-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .mega-col a {
+      font-size: 0.95rem;
+      color: rgba(245, 242, 236, 0.78);
+      transition: color 0.2s ease, padding-left 0.25s var(--ease-editorial);
+      display: inline-block;
+    }
+
+    .mega-col a:hover {
+      color: var(--white);
+      padding-left: 8px;
+    }
+
+    .mega-feature {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      border: 1px solid var(--hairline-gold);
+      overflow: hidden;
+      border-radius: var(--radius-sharp);
+    }
+
+    .mega-feature-caption {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 16px;
+      background: linear-gradient(transparent, rgba(10, 10, 10, 0.92));
+      z-index: 2;
+    }
+
+    .mega-feature-caption span {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      color: var(--gold-soft);
+      text-transform: uppercase;
+    }
+
+    .mega-feature-caption p {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* Fullscreen Mobile Drawer */
+    .mobile-drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(10, 10, 10, 0.97);
+      backdrop-filter: blur(20px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px clamp(20px, 6vw, 48px) 40px;
+      transform: translateX(100%);
+      transition: transform 0.5s var(--ease-editorial);
+    }
+
+    .mobile-drawer.is-open {
+      transform: translateX(0);
+    }
+
+    .mobile-drawer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: auto 0;
+    }
+
+    .mobile-drawer-links a {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 8vw, 3.2rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 14px;
+      transition: color 0.25s ease;
+    }
+
+    .mobile-drawer-links a small {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--gold);
+    }
+
+    .mobile-drawer-links a:hover {
+      color: var(--red-glow);
+    }
+
+    /* ==========================================================================
+       5. SECTION 3: HERO (THREE.JS RIPPLE + CANVAS 2D LEAVES/EMBERS)
+       ========================================================================== */
+    .hero {
+      position: relative;
+      min-height: calc(100svh - var(--nav-h));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--black);
+      padding: 48px 0 80px;
+    }
+
+    .hero-media-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    /* Static fallback image behind WebGL canvas */
+    .hero-fallback-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 22%;
+      filter: contrast(1.12) saturate(0.76) brightness(0.68);
+    }
+
+    #hero-webgl-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    #hero-webgl-canvas.is-ready {
+      opacity: 1;
+    }
+
+    #hero-particles-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .hero-gradient-veil {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(138, 15, 30, 0.22) 0%, rgba(10, 10, 10, 0.76) 72%),
+        linear-gradient(180deg, rgba(10, 10, 10, 0.48) 0%, transparent 32%, rgba(10, 10, 10, 0.94) 100%);
+    }
+
+    .hero-back-type {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      pointer-events: none;
+      user-select: none;
+      overflow: hidden;
+    }
+
+    .hero-back-type span {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(4.8rem, 15vw, 15rem);
+      line-height: 0.84;
+      letter-spacing: -0.04em;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(245, 242, 236, 0.16);
+      white-space: nowrap;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 6;
+      text-align: center;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding-top: 24px;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 16px;
+      border: 1px solid var(--hairline-gold);
+      background: rgba(10, 10, 10, 0.58);
+      backdrop-filter: blur(8px);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold-soft);
+      margin-bottom: 24px;
+    }
+
+    .hero-kicker .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red-glow);
+      box-shadow: 0 0 10px var(--red-glow);
+      animation: pulse-dot 1.8s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.6); opacity: 0.5; }
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(3.2rem, 12.5vw, 11.5rem);
+      line-height: 0.88;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .hero-headline .italic-accent {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      text-transform: none;
+      font-size: 1.08em;
+      background: var(--gold-grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      padding: 0 0.08em;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(1.25rem, 2.6vw, 2rem);
+      color: rgba(245, 242, 236, 0.9);
+      margin-bottom: 36px;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    /* Rotating Circular Badge */
+    .hero-badge-spin {
+      position: absolute;
+      right: clamp(16px, 4vw, 56px);
+      bottom: clamp(24px, 4vw, 48px);
+      z-index: 6;
+      width: 112px;
+      height: 112px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+      .hero-badge-spin {
+        display: flex;
+      }
+    }
+
+    .hero-badge-spin svg {
+      width: 100%;
+      height: 100%;
+      animation: spin-slow 16s linear infinite;
+    }
+
+    .hero-badge-spin .center-mark {
+      position: absolute;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--red-glow);
+      letter-spacing: 0.1em;
+    }
+
+    @keyframes spin-slow {
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-scroll-indicator {
+      position: absolute;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%);
+      z-index: 6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(245, 242, 236, 0.65);
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(180deg, var(--gold), transparent);
+      animation: scroll-line 2s ease-in-out infinite;
+    }
+
+    @keyframes scroll-line {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* Brand Manifesto Marquee Strip */
+    .manifesto-strip {
+      border-top: 1px solid var(--hairline-gold);
+      border-bottom: 1px solid var(--hairline-gold);
+      background: var(--ink);
+      padding: 18px 0;
+      overflow: hidden;
+    }
+
+    .manifesto-track {
+      display: flex;
+      width: max-content;
+      animation: marquee-scroll 34s linear infinite;
+    }
+
+    .manifesto-item {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.1rem, 2.2vw, 1.65rem);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding-right: 40px;
+      white-space: nowrap;
+      color: rgba(245, 242, 236, 0.85);
+    }
+
+    .manifesto-item span {
+      color: var(--red-glow);
+      margin-left: 40px;
+    }
+
+    /* ==========================================================================
+       6. SECTION 4: ARCH CATEGORY STRIP
+       ========================================================================== */
+    .cat-strip-wrap {
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 16px 0 24px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .cat-strip-wrap::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cat-strip-grid {
+      display: flex;
+      gap: 20px;
+      width: max-content;
+      padding: 0 clamp(16px, 4vw, 48px);
+    }
+
+    .cat-arch-card {
+      width: clamp(190px, 20vw, 240px);
+      flex-shrink: 0;
+      position: relative;
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+
+    .cat-arch-media {
+      aspect-ratio: 3 / 4.2;
+      border-radius: var(--radius-arch);
+      border: 1px solid var(--hairline-gold);
+      overflow: hidden;
+      position: relative;
+      background: var(--ink);
+    }
+
+    .cat-arch-card:hover .editorial-img {
+      transform: scale(1.07);
+    }
+
+    .cat-arch-info {
+      margin-top: 14px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 0 4px;
+    }
+
+    .cat-arch-name {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .cat-arch-count {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--gold);
+    }
+
+    /* ==========================================================================
+       7. SECTION 5: FEATURED COLLECTIONS (PINNED / STACKED STORYTELLING)
+       ========================================================================== */
+    .collections-section {
+      position: relative;
+      border-top: 1px solid var(--hairline-white);
+    }
+
+    .collections-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .collection-card {
+      position: sticky;
+      top: calc(var(--nav-h) + 20px);
+      min-height: clamp(480px, 74vh, 720px);
+      background: var(--ink);
+      border: 1px solid var(--hairline-gold);
+      border-radius: var(--radius-sharp);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.75);
+    }
+
+    @media (min-width: 900px) {
+      .collection-card {
+        grid-template-columns: 1.05fr 1fr;
+      }
+    }
+
+    .collection-body {
+      padding: clamp(28px, 5vw, 64px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      z-index: 2;
+      background: linear-gradient(135deg, var(--ink) 0%, rgba(10, 10, 10, 0.96) 100%);
+    }
+
+    .collection-num {
+      font-family: var(--font-mono);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--gold);
+      opacity: 0.75;
+    }
+
+    .collection-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2rem, 4.2vw, 3.8rem);
+      line-height: 0.94;
+      text-transform: uppercase;
+      margin: 18px 0 16px;
+    }
+
+    .collection-desc {
+      color: rgba(245, 242, 236, 0.74);
+      max-width: 44ch;
+      font-size: 0.98rem;
+      margin-bottom: 28px;
+    }
+
+    .collection-media {
+      position: relative;
+      min-height: 320px;
+      overflow: hidden;
+    }
+
+    .collection-media img {
+      clip-path: inset(0 0 0 0);
+    }
+
+    /* ==========================================================================
+       8. SECTION 6: NEW ARRIVALS & PRODUCT CARD SYSTEM
+       ========================================================================== */
+    .section-head-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-tab {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 10px 18px;
+      border: 1px solid var(--hairline-white);
+      border-radius: var(--radius-sharp);
+      color: rgba(245, 242, 236, 0.72);
+      transition: all 0.25s ease;
+    }
+
+    .filter-tab:hover {
+      border-color: var(--gold);
+      color: var(--white);
+    }
+
+    .filter-tab.is-active {
+      background: var(--vampire-red);
+      border-color: var(--red-glow);
+      color: var(--white);
+      box-shadow: 0 0 18px rgba(138, 15, 30, 0.45);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    @media (min-width: 540px) {
+      .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .products-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    .size-chip-row {
+      display: flex;
+      gap: 4px;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+
+    .size-chip-mini {
+      flex: 1;
+      height: 26px;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      border: 1px solid var(--hairline-white);
+      color: rgba(245, 242, 236, 0.8);
+      transition: all 0.2s ease;
+    }
+
+    .size-chip-mini:hover,
+    .size-chip-mini.is-selected {
+      border-color: var(--gold);
+      background: rgba(212, 175, 55, 0.16);
+      color: var(--gold-soft);
+    }
+
+    .quick-add-btn {
+      width: 100%;
+      padding: 8px 10px;
+      background: var(--vampire-red);
+      color: var(--white);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      transition: background 0.2s ease;
+    }
+
+    .quick-add-btn:hover {
+      background: var(--red-glow);
+    }
+
+    .product-info {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .product-top-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .swatch-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .swatch-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 1px solid rgba(245, 242, 236, 0.35);
+    }
+
+    .product-rating {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--gold);
+    }
+
+    .product-name {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.98rem;
+      color: var(--white);
+      line-height: 1.3;
+      text-align: left;
+    }
+
+    .product-name:hover {
+      color: var(--gold-soft);
+    }
+
+    .product-price-row {
+      margin-top: auto;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-family: var(--font-mono);
+    }
+
+    .price-current {
+      font-size: 1rem;
+      font-weight: 600;
+      background: var(--gold-grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .price-old {
+      font-size: 0.8rem;
+      color: var(--red-glow);
+      text-decoration: line-through;
+      opacity: 0.85;
+    }
+
+    /* ==========================================================================
+       9. SECTION 7: OFFER SECTION (3D GOLD "N" RING + BLOOD MOON GLOW)
+       ========================================================================== */
+    .offer-section {
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid var(--hairline-gold);
+      border-bottom: 1px solid var(--hairline-gold);
+      background: var(--black);
+    }
+
+    .blood-moon-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: min(760px, 110vw);
+      height: min(760px, 110vw);
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(224, 30, 55, 0.28) 0%, rgba(138, 15, 30, 0.16) 35%, transparent 70%);
+      pointer-events: none;
+      animation: breathe-moon 5.5s ease-in-out infinite;
+    }
+
+    @keyframes breathe-moon {
+      0%, 100% { transform: translate(-50%, -50%) scale(0.94); opacity: 0.78; }
+      50% { transform: translate(-50%, -50%) scale(1.08); opacity: 1; }
+    }
+
+    .offer-layout {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    @media (min-width: 960px) {
+      .offer-layout {
+        grid-template-columns: 1.2fr 0.8fr;
+      }
+    }
+
+    .offer-headline {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(3rem, 8.5vw, 7.2rem);
+      line-height: 0.88;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .countdown-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 28px 0;
+    }
+
+    .countdown-box {
+      min-width: 78px;
+      padding: 14px 12px;
+      background: rgba(20, 18, 20, 0.88);
+      border: 1px solid var(--hairline-gold);
+      text-align: center;
+    }
+
+    .countdown-val {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--gold-soft);
+      line-height: 1;
+    }
+
+    .countdown-lbl {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      color: rgba(245, 242, 236, 0.6);
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+
+    .coupon-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 20px;
+      border: 1px dashed var(--gold);
+      background: rgba(138, 15, 30, 0.22);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      transition: background 0.25s ease, transform 0.2s ease;
+    }
+
+    .coupon-chip:hover {
+      background: rgba(138, 15, 30, 0.42);
+      transform: translateY(-2px);
+    }
+
+    .coupon-chip strong {
+      color: var(--gold-soft);
+    }
+
+    .offer-3d-stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    #offer-ring-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .offer-tiles {
+      position: relative;
+      z-index: 2;
+      margin-top: 56px;
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .offer-tiles {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .offer-tile {
+      padding: 24px;
+      background: rgba(20, 18, 20, 0.85);
+      border: 1px solid var(--hairline-gold);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color 0.25s ease, transform 0.3s var(--ease-editorial);
+    }
+
+    .offer-tile:hover {
+      border-color: var(--red-glow);
+      transform: translateY(-4px);
+    }
+
+    .offer-tile-tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      color: var(--red-glow);
+      text-transform: uppercase;
+    }
+
+    .offer-tile h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      text-transform: uppercase;
+    }
+
+    .offer-tile p {
+      font-size: 0.88rem;
+      color: rgba(245, 242, 236, 0.72);
+    }
+
+    /* ==========================================================================
+       10. SECTION 8: SHOPPABLE LOOKBOOK BENTO GRID
+       ========================================================================== */
+    .lookbook-bento {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .lookbook-bento {
+        grid-template-columns: repeat(12, 1fr);
+        grid-auto-rows: 260px;
+      }
+      .look-item-1 { grid-column: span 5; grid-row: span 2; }
+      .look-item-2 { grid-column: span 7; grid-row: span 1; }
+      .look-item-3 { grid-column: span 4; grid-row: span 1; }
+      .look-item-4 { grid-column: span 3; grid-row: span 1; }
+      .look-item-5 { grid-column: span 12; grid-row: span 1; }
+    }
+
+    .lookbook-card {
+      position: relative;
+      min-height: 300px;
+      border: 1px solid var(--hairline-white);
+      overflow: hidden;
+      background: var(--ink);
+    }
+
+    @media (min-width: 768px) {
+      .lookbook-card {
+        min-height: 0;
+      }
+    }
+
+    .hotspot-dot {
+      position: absolute;
+      z-index: 6;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(138, 15, 30, 0.9);
+      border: 1.5px solid var(--gold-soft);
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 0 rgba(224, 30, 55, 0.7);
+      animation: hotspot-pulse 2.2s infinite;
+      transition: transform 0.2s ease;
+    }
+
+    .hotspot-dot::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--white);
+    }
+
+    .hotspot-dot:hover {
+      transform: translate(-50%, -50%) scale(1.18);
+    }
+
+    @keyframes hotspot-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(224, 30, 55, 0.7); }
+      70% { box-shadow: 0 0 0 16px rgba(224, 30, 55, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(224, 30, 55, 0); }
+    }
+
+    /* Floating Mini Product Card for Lookbook Hotspot */
+    .lookbook-popover {
+      position: fixed;
+      z-index: 300;
+      width: min(310px, calc(100vw - 32px));
+      background: rgba(14, 12, 14, 0.96);
+      backdrop-filter: blur(18px);
+      border: 1px solid var(--gold);
+      padding: 16px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
+      display: none;
+    }
+
+    .lookbook-popover.is-open {
+      display: block;
+      animation: pop-in 0.25s var(--ease-editorial);
+    }
+
+    @keyframes pop-in {
+      from { opacity: 0; transform: translateY(8px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ==========================================================================
+       11. SECTION 9: BEST SELLERS DRAG CAROUSEL WITH INERTIA
+       ========================================================================== */
+    .carousel-viewport {
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+      padding: 8px 0 24px;
+    }
+
+    .carousel-viewport.is-dragging {
+      cursor: grabbing;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 20px;
+      will-change: transform;
+    }
+
+    .carousel-slide {
+      flex: 0 0 clamp(260px, 28vw, 330px);
+    }
+
+    .carousel-progress-rail {
+      width: 100%;
+      height: 2px;
+      background: rgba(245, 242, 236, 0.14);
+      margin-top: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .carousel-progress-fill {
+      height: 100%;
+      width: 25%;
+      background: var(--gold-grad);
+      transition: width 0.1s linear;
+    }
+
+    /* ==========================================================================
+       12. SECTION 10: FULL SHOP SECTION (STICKY SIDEBAR + GRID/LIST)
+       ========================================================================== */
+    .shop-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    @media (min-width: 1024px) {
+      .shop-layout {
+        grid-template-columns: 270px 1fr;
+      }
+    }
+
+    .shop-sidebar {
+      background: var(--ink);
+      border: 1px solid var(--hairline-gold);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    @media (min-width: 1024px) {
+      .shop-sidebar {
+        position: sticky;
+        top: calc(var(--nav-h) + 20px);
+      }
+    }
+
+    .filter-group h4 {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .checkbox-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: rgba(245, 242, 236, 0.82);
+      cursor: pointer;
+    }
+
+    .checkbox-label input {
+      accent-color: var(--red-glow);
+      width: 16px;
+      height: 16px;
+    }
+
+    .size-filter-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .size-filter-btn {
+      padding: 6px 12px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      border: 1px solid var(--hairline-white);
+      color: rgba(245, 242, 236, 0.8);
+    }
+
+    .size-filter-btn.is-active {
+      border-color: var(--gold);
+      background: rgba(212, 175, 55, 0.16);
+      color: var(--gold-soft);
+    }
+
+    .color-filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .color-filter-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      box-shadow: inset 0 0 0 1px rgba(245, 242, 236, 0.3);
+    }
+
+    .color-filter-btn.is-active {
+      border-color: var(--gold-soft);
+      transform: scale(1.15);
+    }
+
+    .price-slider {
+      width: 100%;
+      accent-color: var(--red-glow);
+    }
+
+    .shop-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--hairline-white);
+    }
+
+    .shop-select {
+      background: var(--ink);
+      color: var(--white);
+      border: 1px solid var(--hairline-gold);
+      padding: 10px 14px;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.1em;
+    }
+
+    .view-toggle-group {
+      display: inline-flex;
+      border: 1px solid var(--hairline-white);
+    }
+
+    .view-toggle-btn {
+      width: 40px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(245, 242, 236, 0.6);
+    }
+
+    .view-toggle-btn.is-active {
+      background: var(--vampire-red);
+      color: var(--white);
+    }
+
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    @media (min-width: 600px) {
+      .shop-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .shop-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .shop-grid.is-list {
+      grid-template-columns: 1fr;
+    }
+
+    .shop-grid.is-list .product-card {
+      flex-direction: row;
+    }
+
+    .shop-grid.is-list .product-media {
+      width: clamp(130px, 26vw, 220px);
+      flex-shrink: 0;
+    }
+
+    /* ==========================================================================
+       13. SECTION 11: SOCIAL PROOF (#NOCTURNEFITS & REVIEWS MARQUEE)
+       ========================================================================== */
+    .ugc-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 56px;
+    }
+
+    @media (min-width: 768px) {
+      .ugc-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+    }
+
+    .ugc-tile {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border: 1px solid var(--hairline-white);
+    }
+
+    .ugc-tile:nth-child(even) {
+      margin-top: 20px;
+    }
+
+    .ugc-handle {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      z-index: 3;
+      padding: 4px 10px;
+      background: rgba(10, 10, 10, 0.78);
+      border: 1px solid var(--hairline-gold);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--gold-soft);
+    }
+
+    .reviews-marquee-wrap {
+      overflow: hidden;
+      border-top: 1px solid var(--hairline-white);
+      border-bottom: 1px solid var(--hairline-white);
+      padding: 32px 0;
+    }
+
+    .reviews-track {
+      display: flex;
+      gap: 20px;
+      width: max-content;
+      animation: marquee-scroll 42s linear infinite;
+    }
+
+    .reviews-track:hover {
+      animation-play-state: paused;
+    }
+
+    .review-card {
+      width: 340px;
+      flex-shrink: 0;
+      padding: 24px;
+      background: var(--ink);
+      border: 1px solid var(--hairline-gold);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .review-stars {
+      color: var(--gold);
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+    }
+
+    .review-quote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.15rem;
+      line-height: 1.45;
+      color: var(--white);
+    }
+
+    .review-author {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: rgba(245, 242, 236, 0.65);
+    }
+
+    .verified-pill {
+      color: var(--red-glow);
+      border: 1px solid rgba(224, 30, 55, 0.45);
+      padding: 2px 7px;
+      font-size: 0.62rem;
+    }
+
+    /* ==========================================================================
+       14. SECTION 12: WHY NOCTURNE
+       ========================================================================== */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      border-top: 1px solid var(--hairline-gold);
+      border-bottom: 1px solid var(--hairline-gold);
+    }
+
+    @media (min-width: 768px) {
+      .why-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .why-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    .why-block {
+      padding: 36px 28px;
+      border-bottom: 1px solid var(--hairline-gold);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    @media (min-width: 1024px) {
+      .why-block {
+        border-bottom: none;
+        border-right: 1px solid var(--hairline-gold);
+      }
+      .why-block:last-child {
+        border-right: none;
+      }
+    }
+
+    .why-num {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+    }
+
+    .why-block h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      text-transform: uppercase;
+    }
+
+    .why-block p {
+      font-size: 0.9rem;
+      color: rgba(245, 242, 236, 0.72);
+    }
+
+    /* ==========================================================================
+       15. SECTION 13: NEWSLETTER
+       ========================================================================== */
+    .newsletter-box {
+      position: relative;
+      padding: clamp(40px, 7vw, 88px) clamp(20px, 5vw, 64px);
+      background: linear-gradient(135deg, rgba(94, 10, 21, 0.28) 0%, var(--ink) 55%, rgba(10, 10, 10, 0.98) 100%);
+      border: 1px solid var(--hairline-gold);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .newsletter-form {
+      max-width: 560px;
+      margin: 32px auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    @media (min-width: 600px) {
+      .newsletter-form {
+        flex-direction: row;
+      }
+    }
+
+    .newsletter-input {
+      flex: 1;
+      background: rgba(10, 10, 10, 0.85);
+      border: 1px solid rgba(224, 30, 55, 0.55);
+      padding: 15px 18px;
+      color: var(--white);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      box-shadow: 0 0 24px rgba(138, 15, 30, 0.28);
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .newsletter-input:focus {
+      border-color: var(--red-glow);
+      box-shadow: 0 0 32px rgba(224, 30, 55, 0.5);
+      outline: none;
+    }
+
+    .newsletter-success {
+      display: none;
+      margin-top: 24px;
+      padding: 16px 24px;
+      border: 1px solid var(--gold);
+      background: rgba(212, 175, 55, 0.1);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--gold-soft);
+    }
+
+    .newsletter-success.is-visible {
+      display: inline-block;
+      animation: pop-in 0.4s var(--ease-editorial);
+    }
+
+    /* ==========================================================================
+       16. SECTION 14: FOOTER
+       ========================================================================== */
+    .site-footer {
+      border-top: 1px solid var(--hairline-gold);
+      background: #070707;
+      padding-top: 64px;
+      padding-bottom: 32px;
+      overflow: hidden;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      margin-bottom: 56px;
+    }
+
+    @media (min-width: 900px) {
+      .footer-grid {
+        grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      }
+    }
+
+    .footer-col h5 {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col a {
+      font-size: 0.9rem;
+      color: rgba(245, 242, 236, 0.7);
+      transition: color 0.2s ease;
+    }
+
+    .footer-col a:hover {
+      color: var(--gold-soft);
+    }
+
+    .footer-wordmark {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(3.4rem, 15.2vw, 15rem);
+      line-height: 0.82;
+      letter-spacing: -0.02em;
+      text-align: center;
+      user-select: none;
+      margin: 24px 0 32px;
+      background: var(--gold-grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 24px;
+      border-top: 1px solid var(--hairline-white);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: rgba(245, 242, 236, 0.55);
+    }
+
+    .payment-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pay-pill {
+      padding: 4px 10px;
+      border: 1px solid var(--hairline-white);
+      color: rgba(245, 242, 236, 0.78);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* ==========================================================================
+       17. DRAWERS (CART & WISHLIST), SEARCH OVERLAY, QUICK-VIEW MODAL & TOASTS
+       ========================================================================== */
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 400;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    .drawer-backdrop.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .side-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: min(440px, 100vw);
+      z-index: 410;
+      background: rgba(14, 12, 14, 0.96);
+      backdrop-filter: blur(20px);
+      border-left: 1px solid var(--hairline-gold);
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.45s var(--ease-editorial);
+    }
+
+    .side-drawer.is-open {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--hairline-white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .drawer-footer {
+      padding: 20px 24px;
+      border-top: 1px solid var(--hairline-gold);
+      background: rgba(10, 10, 10, 0.92);
+    }
+
+    .shipping-bar-wrap {
+      padding: 14px 24px;
+      background: rgba(94, 10, 21, 0.25);
+      border-bottom: 1px solid var(--hairline-white);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+    }
+
+    .shipping-progress-track {
+      height: 4px;
+      background: rgba(245, 242, 236, 0.14);
+      margin-top: 8px;
+      overflow: hidden;
+    }
+
+    .shipping-progress-fill {
+      height: 100%;
+      background: var(--gold-grad);
+      transition: width 0.4s var(--ease-editorial);
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      gap: 14px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--hairline-white);
+    }
+
+    .cart-item img {
+      width: 76px;
+      height: 100px;
+      object-fit: cover;
+      border: 1px solid var(--hairline-white);
+    }
+
+    .qty-control {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--hairline-white);
+    }
+
+    .qty-control button {
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qty-control span {
+      min-width: 28px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+    }
+
+    /* Fullscreen Search Overlay */
+    .search-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 450;
+      background: rgba(10, 10, 10, 0.96);
+      backdrop-filter: blur(22px);
+      padding: 32px clamp(16px, 5vw, 64px);
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .search-overlay.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .search-input-big {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--gold);
+      padding: 16px 0;
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 4.5vw, 3.2rem);
+      color: var(--white);
+      text-transform: uppercase;
+    }
+
+    .search-input-big:focus {
+      outline: none;
+      border-bottom-color: var(--red-glow);
+    }
+
+    .search-results-grid {
+      margin-top: 28px;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      padding-bottom: 40px;
+    }
+    /* Quick-View & Three.js 3D Studio Inspect Modal */
+    .qv-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.86);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .qv-modal.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .qv-dialog {
+      width: min(980px, 100%);
+      max-height: 92vh;
+      overflow-y: auto;
+      background: var(--ink);
+      border: 1px solid var(--gold);
+      display: grid;
+      grid-template-columns: 1fr;
+      position: relative;
+      box-shadow: 0 32px 90px rgba(0, 0, 0, 0.9), 0 0 40px rgba(138, 15, 30, 0.25);
+    }
+
+    @media (min-width: 768px) {
+      .qv-dialog {
+        grid-template-columns: 1.08fr 1fr;
+      }
+    }
+
+    .qv-3d-stage {
+      position: relative;
+      aspect-ratio: 3 / 4;
+      min-height: 380px;
+      background: radial-gradient(circle at 50% 45%, rgba(138, 15, 30, 0.22) 0%, #080708 72%);
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+    }
+
+    .qv-3d-stage.is-dragging {
+      cursor: grabbing;
+    }
+
+    #qv-3d-canvas {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .qv-3d-fallback {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.22;
+      filter: blur(8px);
+      z-index: 1;
+    }
+
+    .qv-360-hint {
+      position: absolute;
+      left: 50%;
+      bottom: 14px;
+      z-index: 4;
+      transform: translateX(-50%);
+      padding: 6px 14px;
+      background: rgba(10, 10, 10, 0.86);
+      border: 1px solid var(--hairline-gold);
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.16em;
+      color: var(--gold-soft);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .qv-details {
+      padding: clamp(24px, 4vw, 40px);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Toast Stack */
+    .toast-stack {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 980;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .toast-item {
+      pointer-events: auto;
+      min-width: 260px;
+      max-width: 360px;
+      padding: 14px 18px;
+      background: rgba(14, 12, 14, 0.96);
+      border: 1px solid var(--gold);
+      border-left: 3px solid var(--red-glow);
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: var(--white);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
+      animation: pop-in 0.3s var(--ease-editorial);
+    }
+
+    /* Reduced Motion Support */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      #cursor-trail-canvas,
+      .custom-cursor-dot,
+      .custom-cursor-ring {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Global Film Grain & Vignette -->
+  <div class="film-grain" aria-hidden="true"></div>
+  <div class="global-vignette" aria-hidden="true"></div>
+
+  <!-- Custom Cursor & Gold-Dust Trail (Desktop) -->
+  <canvas id="cursor-trail-canvas" aria-hidden="true"></canvas>
+  <div class="custom-cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+  <div class="custom-cursor-ring" id="cursor-ring" aria-hidden="true"><span>VIEW</span></div>
+
+  <!-- Preloader -->
+  <div id="preloader" role="status" aria-label="Loading Nocturne Fall 26">
+    <div class="preloader-inner">
+      <div class="preloader-logo" aria-hidden="true">
+        <span>N</span><span>O</span><span>C</span><span>T</span><span>U</span><span>R</span><span>N</span><span>E</span>
+      </div>
+      <div class="preloader-meta">
+        <span>FALL '26 // BLOOD MOON DROP</span>
+        <span class="preloader-count" id="preloader-count">000</span>
+      </div>
+    </div>
+    <div class="preloader-curtain" id="preloader-curtain"></div>
+  </div>
+
+  <!-- ========================================================================
+       SECTION 1: ANNOUNCEMENT BAR
+       ======================================================================== -->
+  <div class="announcement-bar" role="region" aria-label="Store announcements">
+    <div class="marquee-track">
+      <div class="marquee-item">FREE SHIPPING OVER $99 &bull; FALL '26 DROP IS LIVE &bull; TRENDING CLOTHES, FOOTWEAR &amp; JEWELRY &bull; CODE: <strong>BLOODMOON</strong></div>
+      <div class="marquee-item">FREE SHIPPING OVER $99 &bull; FALL '26 DROP IS LIVE &bull; TRENDING CLOTHES, FOOTWEAR &amp; JEWELRY &bull; CODE: <strong>BLOODMOON</strong></div>
+      <div class="marquee-item">FREE SHIPPING OVER $99 &bull; FALL '26 DROP IS LIVE &bull; TRENDING CLOTHES, FOOTWEAR &amp; JEWELRY &bull; CODE: <strong>BLOODMOON</strong></div>
+      <div class="marquee-item">FREE SHIPPING OVER $99 &bull; FALL '26 DROP IS LIVE &bull; TRENDING CLOTHES, FOOTWEAR &amp; JEWELRY &bull; CODE: <strong>BLOODMOON</strong></div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       SECTION 2: STICKY GLASS NAVBAR & MEGA MENU
+       ======================================================================== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#top" class="brand-logo" aria-label="NOCTURNE Home">NOCTURNE</a>
+
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li><a href="#new-arrivals" class="nav-link scramble-link">New</a></li>
+          <li id="mega-trigger-wrap">
+            <a href="#shop" class="nav-link scramble-link" id="nav-shop-trigger" aria-expanded="false" data-mega-filter="Trending Clothes">Clothes</a>
+          </li>
+          <li><a href="#shop" class="nav-link scramble-link" data-mega-filter="Footwear">Footwear</a></li>
+          <li><a href="#shop" class="nav-link scramble-link" data-mega-filter="Jewelry">Jewelry</a></li>
+          <li><a href="#lookbook" class="nav-link scramble-link">Lookbook</a></li>
+          <li><a href="#offers" class="nav-link scramble-link" style="color:var(--red-glow);">Sale</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="nav-icon-btn" id="open-search-btn" aria-label="Search catalog">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        </button>
+        <button class="nav-icon-btn" id="open-wishlist-btn" aria-label="Open wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-9.2-8.4C1 9.4 2.7 5.5 6.3 5.5c2.1 0 3.7 1.2 4.7 2.8 1-1.6 2.6-2.8 4.7-2.8 3.6 0 5.3 3.9 3.5 7.1C19 16.5 12 21 12 21z"/></svg>
+          <span class="nav-badge" id="wishlist-count">0</span>
+        </button>
+        <button class="nav-icon-btn" id="open-cart-btn" aria-label="Open shopping bag">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 8h12l1.2 12.5H4.8L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="nav-badge" id="cart-count">0</span>
+        </button>
+        <button class="nav-icon-btn mobile-menu-btn" id="open-mobile-btn" aria-label="Open mobile menu" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h18M3 12h18M3 17h12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Hover Mega Menu -->
+    <div class="mega-menu" id="mega-menu" aria-label="Shop categories">
+      <div class="container mega-grid">
+        <div class="mega-col">
+          <h4>Trending Clothes</h4>
+          <ul>
+            <li><a href="#shop" data-mega-filter="Trending Clothes">All Trending Apparel</a></li>
+            <li><a href="#shop" data-mega-filter="Outerwear">Cathedral Outerwear</a></li>
+            <li><a href="#shop" data-mega-filter="Knitwear">Obsidian Knitwear</a></li>
+            <li><a href="#shop" data-mega-filter="Denim">Midnight Denim</a></li>
+          </ul>
+        </div>
+        <div class="mega-col">
+          <h4>Footwear &amp; Jewelry</h4>
+          <ul>
+            <li><a href="#shop" data-mega-filter="Footwear">Platform &amp; Moto Boots</a></li>
+            <li><a href="#shop" data-mega-filter="Jewelry">Gilded Rings &amp; Chains</a></li>
+            <li><a href="#shop" data-mega-filter="Streetwear">Heavy Streetwear</a></li>
+            <li><a href="#offers">Eclipse 40% Off Sale</a></li>
+          </ul>
+        </div>
+        <a href="#collections" class="mega-feature img-grade-wrap">
+          <img class="editorial-img" loading="lazy" src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=700&q=80" alt="Blood Moon Edit editorial coat preview" onerror="this.src='https://placehold.co/700x525/141214/D4AF37?text=BLOOD+MOON+EDIT'" />
+          <div class="mega-feature-caption">
+            <span>Fall '26 Campaign</span>
+            <p>The Blood Moon Edit</p>
+          </div>
+        </a>
+        <a href="#shop" class="mega-feature img-grade-wrap" data-mega-filter="Jewelry">
+          <img class="editorial-img" loading="lazy" src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=700&q=80" alt="Gilded Jewelry Vault gold rings and chains preview" onerror="this.src='https://placehold.co/700x525/141214/D4AF37?text=GILDED+JEWELRY'" />
+          <div class="mega-feature-caption">
+            <span>New Vault</span>
+            <p>Gilded Jewelry</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Fullscreen Mobile Menu Drawer -->
+  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+    <div style="display:flex;align-items:center;justify-content:space-between;">
+      <span class="brand-logo">NOCTURNE</span>
+      <button class="nav-icon-btn" id="close-mobile-btn" aria-label="Close mobile menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <ul class="mobile-drawer-links">
+      <li><a href="#new-arrivals" class="mobile-nav-link"><small>01</small>New Drop</a></li>
+      <li><a href="#shop" class="mobile-nav-link" data-mega-filter="Trending Clothes"><small>02</small>Clothes</a></li>
+      <li><a href="#shop" class="mobile-nav-link" data-mega-filter="Footwear"><small>03</small>Footwear</a></li>
+      <li><a href="#shop" class="mobile-nav-link" data-mega-filter="Jewelry"><small>04</small>Jewelry</a></li>
+      <li><a href="#lookbook" class="mobile-nav-link"><small>05</small>Lookbook</a></li>
+      <li><a href="#offers" class="mobile-nav-link"><small>06</small>Sale</a></li>
+    </ul>
+    <div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--gold);letter-spacing:0.16em;">
+      DRESS LIKE THE NIGHT OWES YOU. // FALL '26
+    </div>
+  </div>
+
+  <main id="top">
+    <!-- ======================================================================
+         SECTION 3: HERO (WEBGL RIPPLE PLANE + CANVAS 2D LEAVES/EMBERS)
+         ====================================================================== -->
+    <section class="hero" id="hero-section" aria-label="Fall 26 Blood Moon Drop Campaign">
+      <div class="hero-media-layer">
+        <img
+          id="hero-fallback-img"
+          class="hero-fallback-img"
+          src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1600&q=85"
+          alt="NOCTURNE Fall 26 model in black cathedral overcoat under dramatic crimson twilight"
+          onerror="this.src='https://placehold.co/1600x1000/141214/8A0F1E?text=NOCTURNE+FALL+26'"
+        />
+        <canvas id="hero-webgl-canvas" aria-hidden="true"></canvas>
+        <div class="hero-gradient-veil" aria-hidden="true"></div>
+        <canvas id="hero-particles-canvas" aria-hidden="true"></canvas>
+      </div>
+
+      <div class="hero-back-type" aria-hidden="true">
+        <span>FALL</span>
+        <span>NIGHTS</span>
+      </div>
+
+      <div class="container hero-content">
+        <div class="hero-kicker">
+          <span class="dot"></span>
+          <span>FALL '26 &mdash; THE BLOOD MOON DROP</span>
+        </div>
+        <h1 class="hero-headline reveal-hero">
+          FALL <span class="italic-accent">of</span><br />
+          <span class="text-outline">NOCTURNE</span>
+        </h1>
+        <p class="hero-tagline reveal-hero">&ldquo;Dress like the night owes you.&rdquo;</p>
+        <div class="hero-ctas reveal-hero">
+          <a href="#new-arrivals" class="btn btn-red magnetic-btn">Shop the Drop</a>
+          <a href="#lookbook" class="btn btn-gold-outline magnetic-btn">Explore Lookbook</a>
+        </div>
+      </div>
+
+      <!-- Rotating Circular SVG Text Badge -->
+      <div class="hero-badge-spin" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <defs>
+            <path id="circleTextPath" d="M 60, 60 m -44, 0 a 44,44 0 1,1 88,0 a 44,44 0 1,1 -88,0" />
+          </defs>
+          <text fill="#D4AF37" font-family="JetBrains Mono, monospace" font-size="8.6" letter-spacing="2.3">
+            <textPath href="#circleTextPath">NEW SEASON 2026 &bull; BLOOD MOON DROP &bull; </textPath>
+          </text>
+        </svg>
+        <span class="center-mark">&#10022;</span>
+      </div>
+
+      <div class="hero-scroll-indicator" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="hero-scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- Brand Manifesto Marquee -->
+    <div class="manifesto-strip" aria-hidden="true">
+      <div class="manifesto-track">
+        <div class="manifesto-item">NO CAP. JUST COATS.<span>&#9830;</span></div>
+        <div class="manifesto-item">DARK ACADEMIA REBORN<span>&#9830;</span></div>
+        <div class="manifesto-item">HEAVYWEIGHT SILHOUETTES<span>&#9830;</span></div>
+        <div class="manifesto-item">BLOOD MOON CAPSULE '26<span>&#9830;</span></div>
+        <div class="manifesto-item">NO CAP. JUST COATS.<span>&#9830;</span></div>
+        <div class="manifesto-item">DARK ACADEMIA REBORN<span>&#9830;</span></div>
+        <div class="manifesto-item">HEAVYWEIGHT SILHOUETTES<span>&#9830;</span></div>
+        <div class="manifesto-item">BLOOD MOON CAPSULE '26<span>&#9830;</span></div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         SECTION 4: ARCH CATEGORY STRIP
+         ====================================================================== -->
+    <section class="section-pad" id="categories" aria-labelledby="cat-heading">
+      <div class="container section-head-row">
+        <div>
+          <div class="section-eyebrow">01 / Silhouettes</div>
+          <h2 class="section-title" id="cat-heading">Shop by <span class="font-serif-italic text-gold-foil">Archetype</span></h2>
+        </div>
+        <p style="max-width:34ch;color:rgba(245,242,236,0.68);font-size:0.92rem;">
+          Eight gothic-streetwear pillars cut from 520GSM cotton, matte calfskin, and brushed Italian wool.
+        </p>
+      </div>
+      <div class="cat-strip-wrap">
+        <div class="cat-strip-grid" id="category-strip-grid"></div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 5: FEATURED COLLECTIONS (STACKED SCROLL STORYTELLING)
+         ====================================================================== -->
+    <section class="section-pad collections-section" id="collections" aria-labelledby="collections-heading">
+      <div class="container">
+        <div class="section-head-row">
+          <div>
+            <div class="section-eyebrow">02 / Editorial Chapters</div>
+            <h2 class="section-title" id="collections-heading">Featured <span class="font-serif-italic text-gold-foil">Collections</span></h2>
+          </div>
+          <span class="font-mono" style="font-size:0.76rem;color:var(--gold);letter-spacing:0.16em;">SCROLL TO UNVEIL 01&mdash;04</span>
+        </div>
+
+        <div class="collections-stack">
+          <article class="collection-card">
+            <div class="collection-body">
+              <div class="collection-num">01</div>
+              <div>
+                <h3 class="collection-title">The Blood Moon <span class="font-serif-italic text-gold-foil">Edit</span></h3>
+                <p class="collection-desc">Crimson-lined wool trenches, corseted blazers, and heavyweight streetwear engineered for midnight campus walks and rooftop after-hours.</p>
+                <a href="#shop" class="u-link font-mono" style="font-size:0.78rem;letter-spacing:0.18em;color:var(--gold-soft);" data-collection-filter="Trending Clothes">SHOP COLLECTION &rarr;</a>
+              </div>
+            </div>
+            <div class="collection-media img-grade-wrap">
+              <img class="editorial-img" loading="lazy" src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1000&q=80" alt="The Blood Moon Edit gothic streetwear editorial" onerror="this.src='https://placehold.co/900x1000/141214/8A0F1E?text=01+BLOOD+MOON'" />
+            </div>
+          </article>
+
+          <article class="collection-card">
+            <div class="collection-body">
+              <div class="collection-num">02</div>
+              <div>
+                <h3 class="collection-title">Gilded Jewelry <span class="font-serif-italic text-gold-foil">Vault</span></h3>
+                <p class="collection-desc">18k gold-vermeil signets, blood-garnet pendants, thorn-carved cuffs, and heavy chain chokers forged for nocturnal layering.</p>
+                <a href="#shop" class="u-link font-mono" style="font-size:0.78rem;letter-spacing:0.18em;color:var(--gold-soft);" data-collection-filter="Jewelry">SHOP JEWELRY VAULT &rarr;</a>
+              </div>
+            </div>
+            <div class="collection-media img-grade-wrap">
+              <img class="editorial-img" loading="lazy" src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1000&q=80" alt="Gilded Jewelry Vault gold necklaces and signet rings" onerror="this.src='https://placehold.co/900x1000/141214/D4AF37?text=02+JEWELRY+VAULT'" />
+            </div>
+          </article>
+
+          <article class="collection-card">
+            <div class="collection-body">
+              <div class="collection-num">03</div>
+              <div>
+                <h3 class="collection-title">Cathedral <span class="font-serif-italic text-gold-foil">Footwear</span></h3>
+                <p class="collection-desc">55mm architectural commando soles, Goodyear-welted leather combat boots, chunky Chelseas, and crimson-sole street sneakers.</p>
+                <a href="#shop" class="u-link font-mono" style="font-size:0.78rem;letter-spacing:0.18em;color:var(--gold-soft);" data-collection-filter="Footwear">SHOP FOOTWEAR &rarr;</a>
+              </div>
+            </div>
+            <div class="collection-media img-grade-wrap">
+              <img class="editorial-img" loading="lazy" src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1000&q=80" alt="Cathedral Footwear dark luxury boots editorial" onerror="this.src='https://placehold.co/900x1000/141214/D4AF37?text=03+FOOTWEAR'" />
+            </div>
+          </article>
+
+          <article class="collection-card">
+            <div class="collection-body">
+              <div class="collection-num">04</div>
+              <div>
+                <h3 class="collection-title">Midnight <span class="font-serif-italic text-gold-foil">Outerwear</span></h3>
+                <p class="collection-desc">Ankle-grazing double-breasted wool overcoats and matte full-grain calfskin bombers. Sculpted lapels with zero compromise on warmth.</p>
+                <a href="#shop" class="u-link font-mono" style="font-size:0.78rem;letter-spacing:0.18em;color:var(--gold-soft);" data-collection-filter="Outerwear">SHOP OUTERWEAR &rarr;</a>
+              </div>
+            </div>
+            <div class="collection-media img-grade-wrap">
+              <img class="editorial-img" loading="lazy" src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1000&q=80" alt="Midnight Outerwear matte black leather jacket" onerror="this.src='https://placehold.co/900x1000/141214/8A0F1E?text=04+OUTERWEAR'" />
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 6: NEW ARRIVALS & TRENDING SHOWCASE (3D ANIMATED CARDS)
+         ====================================================================== -->
+    <section class="section-pad" id="new-arrivals" aria-labelledby="arrivals-heading">
+      <div class="container">
+        <div class="section-head-row">
+          <div>
+            <div class="section-eyebrow">03 / Fresh Blood &bull; 3D Interactive</div>
+            <h2 class="section-title" id="arrivals-heading">New &amp; <span class="font-serif-italic text-gold-foil">Trending</span></h2>
+          </div>
+          <div class="filter-tabs" role="tablist" aria-label="Filter trending showcase" id="arrivals-tabs">
+            <button class="filter-tab is-active" data-tab="All" role="tab" aria-selected="true">All</button>
+            <button class="filter-tab" data-tab="Trending Clothes" role="tab" aria-selected="false">Trending Clothes</button>
+            <button class="filter-tab" data-tab="Footwear" role="tab" aria-selected="false">Footwear</button>
+            <button class="filter-tab" data-tab="Jewelry" role="tab" aria-selected="false">Jewelry</button>
+            <button class="filter-tab" data-tab="Outerwear" role="tab" aria-selected="false">Outerwear</button>
+            <button class="filter-tab" data-tab="Knitwear" role="tab" aria-selected="false">Knitwear</button>
+          </div>
+        </div>
+
+        <div class="products-grid" id="new-arrivals-grid"></div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 7: OFFER SECTION (3D GOLD "N" RING + BLOOD MOON GLOW)
+         ====================================================================== -->
+    <section class="section-pad offer-section" id="offers" aria-labelledby="offer-heading">
+      <div class="blood-moon-glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="offer-layout">
+          <div>
+            <div class="section-eyebrow">04 / Eclipse Event</div>
+            <h2 class="offer-headline text-gold-foil" id="offer-heading">UP TO 40% OFF</h2>
+            <p style="max-width:46ch;color:rgba(245,242,236,0.78);font-size:1rem;">
+              Limited-window archive pricing on Fall '26 outerwear, cathedral boots, and gilded jewelry. Stack an extra 20% off with our coven code.
+            </p>
+
+            <div class="countdown-grid" role="timer" aria-label="Offer countdown">
+              <div class="countdown-box"><span class="countdown-val" id="cd-days">03</span><span class="countdown-lbl">Days</span></div>
+              <div class="countdown-box"><span class="countdown-val" id="cd-hrs">14</span><span class="countdown-lbl">Hrs</span></div>
+              <div class="countdown-box"><span class="countdown-val" id="cd-min">42</span><span class="countdown-lbl">Min</span></div>
+              <div class="countdown-box"><span class="countdown-val" id="cd-sec">19</span><span class="countdown-lbl">Sec</span></div>
+            </div>
+
+            <button type="button" class="coupon-chip" id="copy-coupon-btn" aria-label="Copy coupon code BLOODMOON">
+              <span>CODE: <strong>BLOODMOON</strong></span>
+              <span style="color:var(--red-glow);">TAP TO COPY</span>
+            </button>
+          </div>
+
+          <div class="offer-3d-stage" aria-label="3D rotating gold Nocturne monogram ring">
+            <canvas id="offer-ring-canvas"></canvas>
+          </div>
+        </div>
+
+        <div class="offer-tiles">
+          <div class="offer-tile">
+            <span class="offer-tile-tag">Bundle Offer</span>
+            <h3>Buy 2, Get 1 Free</h3>
+            <p>Mix any gilded jewelry or knitwear pieces—lowest-priced item drops to $0 in bag.</p>
+          </div>
+          <div class="offer-tile">
+            <span class="offer-tile-tag">Dark Academia Perk</span>
+            <h3>Student 15% Off</h3>
+            <p>Instant verification with any valid .edu or student ID. Works on full-price drops.</p>
+          </div>
+          <div class="offer-tile">
+            <span class="offer-tile-tag">Zero Risk</span>
+            <h3>Free 30-Day Returns</h3>
+            <p>Prepaid express return labels in every parcel. Instant exchanges on all footwear &amp; coats.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 8: SHOPPABLE LOOKBOOK (BENTO GRID + UNIQUE PHOTOS + HOTSPOTS)
+         ====================================================================== -->
+    <section class="section-pad" id="lookbook" aria-labelledby="lookbook-heading">
+      <div class="container">
+        <div class="section-head-row">
+          <div>
+            <div class="section-eyebrow">05 / Night Vision</div>
+            <h2 class="section-title" id="lookbook-heading">Shoppable <span class="font-serif-italic text-gold-foil">Lookbook</span></h2>
+          </div>
+          <p style="font-family:var(--font-mono);font-size:0.74rem;color:var(--gold);letter-spacing:0.14em;">TAP ANY CRIMSON DOT TO SHOP THE FIT</p>
+        </div>
+
+        <div class="lookbook-bento">
+          <div class="lookbook-card look-item-1 img-grade-wrap">
+            <img class="editorial-img" loading="lazy" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" alt="Look 01 dark wool coat and platform combat boots" onerror="this.src='https://placehold.co/900x1100/141214/8A0F1E?text=LOOK+01'" />
+            <button class="hotspot-dot" style="top:34%;left:48%;" data-product-id="1" aria-label="Shop Cathedral Wool Overcoat"></button>
+            <button class="hotspot-dot" style="top:78%;left:54%;" data-product-id="11" aria-label="Shop Cathedral Platform Combat Boots"></button>
+          </div>
+
+          <div class="lookbook-card look-item-2 img-grade-wrap">
+            <img class="editorial-img" loading="lazy" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=80" alt="Look 02 gilded gothic jewelry portrait" onerror="this.src='https://placehold.co/1000x600/141214/D4AF37?text=LOOK+02'" />
+            <button class="hotspot-dot" style="top:42%;left:46%;" data-product-id="18" aria-label="Shop Blood Garnet Gothic Pendant Necklace"></button>
+            <button class="hotspot-dot" style="top:58%;left:62%;" data-product-id="17" aria-label="Shop Sovereign Signet Gold Ring"></button>
+          </div>
+
+          <div class="lookbook-card look-item-3 img-grade-wrap">
+            <img class="editorial-img" loading="lazy" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80" alt="Look 03 distressed mohair knitwear editorial" onerror="this.src='https://placehold.co/800x600/141214/D4AF37?text=LOOK+03'" />
+            <button class="hotspot-dot" style="top:48%;left:52%;" data-product-id="5" aria-label="Shop Obsidian Mohair Distressed Knit"></button>
+          </div>
+
+          <div class="lookbook-card look-item-4 img-grade-wrap">
+            <img class="editorial-img" loading="lazy" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=700&q=80" alt="Look 04 cropped leather bomber and chain choker" onerror="this.src='https://placehold.co/700x600/141214/8A0F1E?text=LOOK+04'" />
+            <button class="hotspot-dot" style="top:46%;left:50%;" data-product-id="2" aria-label="Shop Blood Moon Cropped Leather Bomber"></button>
+          </div>
+
+          <div class="lookbook-card look-item-5 img-grade-wrap">
+            <img class="editorial-img" loading="lazy" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1400&q=80" alt="Look 05 heavyweight velvet jacket and baggy cargo denim" onerror="this.src='https://placehold.co/1400x500/141214/D4AF37?text=LOOK+05'" />
+            <button class="hotspot-dot" style="top:45%;left:36%;" data-product-id="9" aria-label="Shop Velvet Draped Hooded Jacket"></button>
+            <button class="hotspot-dot" style="top:60%;left:62%;" data-product-id="16" aria-label="Shop Crimson-Sole Street Sneakers"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Floating Lookbook Hotspot Popover -->
+    <div class="lookbook-popover" id="lookbook-popover" role="dialog" aria-label="Hotspot product preview"></div>
+
+    <!-- ======================================================================
+         SECTION 9: BEST SELLERS (DRAGGABLE INERTIA CAROUSEL)
+         ====================================================================== -->
+    <section class="section-pad" id="best-sellers" style="border-top:1px solid var(--hairline-white);" aria-labelledby="bestsellers-heading">
+      <div class="container">
+        <div class="section-head-row">
+          <div>
+            <div class="section-eyebrow">06 / Cult Classics</div>
+            <h2 class="section-title" id="bestsellers-heading">Best <span class="font-serif-italic text-gold-foil">Sellers</span></h2>
+          </div>
+          <span class="font-mono" style="font-size:0.74rem;color:rgba(245,242,236,0.65);letter-spacing:0.14em;">DRAG TO EXPLORE &harr;</span>
+        </div>
+
+        <div class="carousel-viewport" id="bestseller-viewport">
+          <div class="carousel-track" id="bestseller-track"></div>
+        </div>
+
+        <div class="carousel-progress-rail" aria-hidden="true">
+          <div class="carousel-progress-fill" id="bestseller-progress"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 10: FULL SHOP SECTION (STICKY SIDEBAR + 24 PRODUCTS)
+         ====================================================================== -->
+    <section class="section-pad" id="shop" style="border-top:1px solid var(--hairline-gold);" aria-labelledby="shop-heading">
+      <div class="container">
+        <div class="section-head-row">
+          <div>
+            <div class="section-eyebrow">07 / The Archive</div>
+            <h2 class="section-title" id="shop-heading">Full <span class="font-serif-italic text-gold-foil">Catalog</span></h2>
+          </div>
+          <button class="u-link font-mono" id="reset-filters-btn" style="font-size:0.74rem;color:var(--gold-soft);letter-spacing:0.14em;">RESET ALL FILTERS</button>
+        </div>
+
+        <div class="shop-layout">
+          <!-- Sticky Filter Sidebar -->
+          <aside class="shop-sidebar" aria-label="Catalog filters">
+            <div class="filter-group">
+              <h4>Category</h4>
+              <div class="checkbox-list" id="filter-categories"></div>
+            </div>
+
+            <div class="filter-group">
+              <h4>Size</h4>
+              <div class="size-filter-grid" id="filter-sizes">
+                <button class="size-filter-btn" data-size="XS">XS</button>
+                <button class="size-filter-btn" data-size="S">S</button>
+                <button class="size-filter-btn" data-size="M">M</button>
+                <button class="size-filter-btn" data-size="L">L</button>
+                <button class="size-filter-btn" data-size="XL">XL</button>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h4>Color</h4>
+              <div class="color-filter-row" id="filter-colors">
+                <button class="color-filter-btn" data-color="#0A0A0A" style="background:#0A0A0A;" aria-label="Filter Black"></button>
+                <button class="color-filter-btn" data-color="#5E0A15" style="background:#5E0A15;" aria-label="Filter Blood Red"></button>
+                <button class="color-filter-btn" data-color="#2B282B" style="background:#2B282B;" aria-label="Filter Charcoal"></button>
+                <button class="color-filter-btn" data-color="#D4AF37" style="background:#D4AF37;" aria-label="Filter Gold"></button>
+                <button class="color-filter-btn" data-color="#F5F2EC" style="background:#F5F2EC;" aria-label="Filter Bone White"></button>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h4>Max Price: <span id="price-max-label" style="color:var(--white);">$450</span></h4>
+              <input type="range" min="50" max="450" step="10" value="450" class="price-slider" id="filter-price" aria-label="Maximum price" />
+            </div>
+          </aside>
+
+          <!-- Main Catalog Area -->
+          <div>
+            <div class="shop-toolbar">
+              <span class="font-mono" id="shop-result-count" style="font-size:0.78rem;color:rgba(245,242,236,0.7);">Showing 9 of 24 pieces</span>
+              <div style="display:flex;align-items:center;gap:12px;">
+                <select class="shop-select" id="shop-sort" aria-label="Sort products">
+                  <option value="featured">Sort: Featured</option>
+                  <option value="price-asc">Price: Low to High</option>
+                  <option value="price-desc">Price: High to Low</option>
+                  <option value="rating">Top Rated</option>
+                </select>
+                <div class="view-toggle-group" role="group" aria-label="Layout toggle">
+                  <button class="view-toggle-btn is-active" id="view-grid-btn" aria-label="Grid view">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6"/><rect x="9" y="1" width="6" height="6"/><rect x="1" y="9" width="6" height="6"/><rect x="9" y="9" width="6" height="6"/></svg>
+                  </button>
+                  <button class="view-toggle-btn" id="view-list-btn" aria-label="List view">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="2" width="14" height="3"/><rect x="1" y="7" width="14" height="3"/><rect x="1" y="12" width="14" height="3"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="shop-grid" id="shop-catalog-grid"></div>
+
+            <div style="text-align:center;margin-top:40px;">
+              <button class="btn btn-gold-outline" id="load-more-btn">Load More Pieces</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 11: SOCIAL PROOF (#NOCTURNEFITS + REVIEWS MARQUEE)
+         ====================================================================== -->
+    <section class="section-pad" id="social-proof" aria-labelledby="ugc-heading">
+      <div class="container">
+        <div class="section-head-row">
+          <div>
+            <div class="section-eyebrow">08 / Community</div>
+            <h2 class="section-title" id="ugc-heading">#Nocturne<span class="font-serif-italic text-gold-foil">Fits</span></h2>
+          </div>
+          <p style="font-family:var(--font-mono);font-size:0.76rem;color:rgba(245,242,236,0.7);">TAG @NOCTURNE.LABEL TO BE FEATURED</p>
+        </div>
+
+        <div class="ugc-grid">
+          <div class="ugc-tile img-grade-wrap"><img class="editorial-img" loading="lazy" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=600&q=80" alt="Community streetwear fit by @lilith.v" /><span class="ugc-handle">@lilith.v</span></div>
+          <div class="ugc-tile img-grade-wrap"><img class="editorial-img" loading="lazy" src="https://images.unsplash.com/photo-1488161628813-04466f872be2?auto=format&fit=crop&w=600&q=80" alt="Community outerwear fit by @kael.noir" /><span class="ugc-handle">@kael.noir</span></div>
+          <div class="ugc-tile img-grade-wrap"><img class="editorial-img" loading="lazy" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=600&q=80" alt="Community knitwear fit by @soren.exe" /><span class="ugc-handle">@soren.exe</span></div>
+          <div class="ugc-tile img-grade-wrap"><img class="editorial-img" loading="lazy" src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80" alt="Community gothic accessories fit by @nyx.archive" /><span class="ugc-handle">@nyx.archive</span></div>
+        </div>
+      </div>
+
+      <div class="reviews-marquee-wrap" aria-label="Verified buyer reviews">
+        <div class="reviews-track" id="reviews-marquee-track"></div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 12: WHY NOCTURNE
+         ====================================================================== -->
+    <section class="section-pad" id="why-nocturne" aria-labelledby="why-heading">
+      <div class="container">
+        <div class="section-head-row">
+          <div>
+            <div class="section-eyebrow">09 / The Standard</div>
+            <h2 class="section-title" id="why-heading">Why <span class="font-serif-italic text-gold-foil">Nocturne</span></h2>
+          </div>
+          <p style="max-width:36ch;color:rgba(245,242,236,0.7);font-size:0.92rem;">No fast-fashion fluff. Built for people who treat sidewalks like cathedrals.</p>
+        </div>
+
+        <div class="why-grid">
+          <div class="why-block">
+            <span class="why-num">01 / TEXTILES</span>
+            <h3>Heavyweight Fabrics</h3>
+            <p>520GSM French terry, Italian boiled wool, and full-grain matte calfskin that holds an architectural drape all night.</p>
+          </div>
+          <div class="why-block">
+            <span class="why-num">02 / SCARCITY</span>
+            <h3>Numbered Limited Drops</h3>
+            <p>Every Blood Moon piece is cut in small batches with woven serial tags. Once a silhouette sells out, it stays in the vault.</p>
+          </div>
+          <div class="why-block">
+            <span class="why-num">03 / GUARANTEE</span>
+            <h3>30-Day Easy Returns</h3>
+            <p>Free return shipping and instant size exchanges for 30 days. Try the fit at home under your own lighting.</p>
+          </div>
+          <div class="why-block">
+            <span class="why-num">04 / LOGISTICS</span>
+            <h3>Express Worldwide</h3>
+            <p>Tracked DHL Express from our Milan &amp; NYC studios to 90+ countries. Free express shipping over $99.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 13: NEWSLETTER
+         ====================================================================== -->
+    <section class="section-pad" id="newsletter" aria-labelledby="newsletter-heading">
+      <div class="container">
+        <div class="newsletter-box">
+          <div class="section-eyebrow" style="justify-content:center;">10 / Private Access</div>
+          <h2 class="section-title" id="newsletter-heading">Join the <span class="font-serif-italic text-gold-foil">Coven.</span></h2>
+          <p style="max-width:44ch;margin:16px auto 0;color:rgba(245,242,236,0.76);">
+            Get 10% off your next order + 24-hour early access before the Blood Moon archive goes public.
+          </p>
+          <form class="newsletter-form" id="newsletter-form">
+            <input type="email" required class="newsletter-input" id="newsletter-email" placeholder="ENTER YOUR EMAIL..." aria-label="Email address" />
+            <button type="submit" class="btn btn-red magnetic-btn">Enter the Night</button>
+          </form>
+          <div class="newsletter-success" id="newsletter-success" role="status">
+            &#10022; WELCOME TO THE COVEN. USE CODE <strong>COVEN10</strong> OR <strong>BLOODMOON</strong> AT CHECKOUT.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       SECTION 14: FOOTER
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="brand-logo" style="margin-bottom:14px;">NOCTURNE</div>
+          <p style="font-size:0.88rem;color:rgba(245,242,236,0.64);max-width:30ch;">
+            Dark academia meets luxury gothic streetwear. Designed in Milan &amp; Brooklyn for the after-hours generation.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h5>Shop</h5>
+          <ul>
+            <li><a href="#new-arrivals">New Arrivals</a></li>
+            <li><a href="#collections">Blood Moon Edit</a></li>
+            <li><a href="#shop">Cathedral Coats</a></li>
+            <li><a href="#lookbook">Lookbook '26</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Client Care</h5>
+          <ul>
+            <li><a href="#why-nocturne">Shipping &amp; Returns</a></li>
+            <li><a href="#offers">Student 15% Off</a></li>
+            <li><a href="#shop">Size &amp; Drape Guide</a></li>
+            <li><a href="#newsletter">Contact Concierge</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Socials</h5>
+          <ul>
+            <li><a href="#social-proof">Instagram / @nocturne</a></li>
+            <li><a href="#social-proof">TikTok / #NocturneFits</a></li>
+            <li><a href="#social-proof">Pinterest Archive</a></li>
+            <li><a href="#social-proof">Spotify Night Mix</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-wordmark" aria-hidden="true">NOCTURNE</div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 NOCTURNE LABEL. ALL RIGHTS RESERVED.</span>
+        <div class="payment-badges" aria-label="Accepted payment methods">
+          <span class="pay-pill">VISA</span>
+          <span class="pay-pill">MASTERCARD</span>
+          <span class="pay-pill">AMEX</span>
+          <span class="pay-pill">APPLE PAY</span>
+          <span class="pay-pill">KLARNA</span>
+        </div>
+        <button class="u-link font-mono" id="back-to-top-btn" style="color:var(--gold-soft);letter-spacing:0.14em;">BACK TO TOP &uarr;</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       OVERLAYS: CART DRAWER, WISHLIST DRAWER, SEARCH, QUICK-VIEW, TOASTS
+       ======================================================================== -->
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+
+  <!-- Slide-Over Glass Cart Drawer -->
+  <aside class="side-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-label="Shopping bag">
+    <div class="drawer-header">
+      <h3 class="font-display" style="font-size:1.3rem;">YOUR BAG (<span id="cart-drawer-count">0</span>)</h3>
+      <button class="nav-icon-btn" id="close-cart-btn" aria-label="Close shopping bag">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="shipping-bar-wrap">
+      <div id="shipping-bar-text">Add $99.00 more for FREE Express Shipping</div>
+      <div class="shipping-progress-track"><div class="shipping-progress-fill" id="shipping-progress-fill" style="width:0%"></div></div>
+    </div>
+    <div class="drawer-body" id="cart-items-container"></div>
+    <div class="drawer-footer">
+      <div style="display:flex;gap:8px;margin-bottom:14px;">
+        <input type="text" id="cart-coupon-input" placeholder="CODE: BLOODMOON" aria-label="Coupon code" style="flex:1;background:var(--ink);border:1px solid var(--hairline-white);padding:10px 12px;color:var(--white);font-family:var(--font-mono);font-size:0.76rem;text-transform:uppercase;" />
+        <button class="btn btn-gold-outline" id="apply-coupon-btn" style="padding:10px 16px;min-height:40px;">Apply</button>
+      </div>
+      <div id="cart-discount-row" style="display:none;justify-content:space-between;font-family:var(--font-mono);font-size:0.78rem;color:var(--red-glow);margin-bottom:6px;">
+        <span>BLOODMOON (20% OFF)</span>
+        <span id="cart-discount-val">-$0.00</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
+        <span class="font-mono" style="font-size:0.8rem;letter-spacing:0.14em;color:rgba(245,242,236,0.7);">SUBTOTAL</span>
+        <span class="font-mono text-gold-foil" id="cart-subtotal-val" style="font-size:1.35rem;font-weight:600;">$0.00</span>
+      </div>
+      <button class="btn btn-red" id="checkout-btn" style="width:100%;">Proceed to Checkout</button>
+    </div>
+  </aside>
+
+  <!-- Slide-Over Glass Wishlist Drawer -->
+  <aside class="side-drawer" id="wishlist-drawer" role="dialog" aria-modal="true" aria-label="Saved wishlist">
+    <div class="drawer-header">
+      <h3 class="font-display" style="font-size:1.3rem;">SAVED (<span id="wishlist-drawer-count">0</span>)</h3>
+      <button class="nav-icon-btn" id="close-wishlist-btn" aria-label="Close wishlist">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body" id="wishlist-items-container"></div>
+  </aside>
+
+  <!-- Fullscreen Search Overlay -->
+  <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Search catalog">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <span class="font-mono" style="font-size:0.74rem;color:var(--gold);letter-spacing:0.2em;">SEARCH THE ARCHIVE</span>
+      <button class="nav-icon-btn" id="close-search-btn" aria-label="Close search">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <input type="search" class="search-input-big" id="search-input" placeholder="COAT, MOHAIR, BOOTS..." aria-label="Search products" />
+    <div class="search-results-grid" id="search-results-grid"></div>
+  </div>
+
+  <!-- Quick-View & Interactive Three.js 3D Studio Inspect Modal -->
+  <div class="qv-modal" id="qv-modal" role="dialog" aria-modal="true" aria-label="3D Product Studio Inspect">
+    <div class="qv-dialog">
+      <button class="nav-icon-btn" id="close-qv-btn" aria-label="Close 3D inspect modal" style="position:absolute;top:12px;right:12px;z-index:20;background:rgba(10,10,10,0.85);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <div class="qv-3d-stage" id="qv-3d-stage">
+        <img id="qv-3d-fallback" class="qv-3d-fallback" src="" alt="" />
+        <canvas id="qv-3d-canvas"></canvas>
+        <div class="qv-360-hint">&larr; DRAG 360&deg; TO SPIN &amp; INSPECT IN 3D &rarr;</div>
+      </div>
+      <div class="qv-details" id="qv-details"></div>
+    </div>
+  </div>
+
+  <!-- Toast Stack -->
+  <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
+
+  <script type="module">
+    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+
+    /* ==========================================================================
+       NOCTURNE — CORE APPLICATION SCRIPT (ES MODULE + THREE.JS 0.160.0)
+       ========================================================================== */
+    const CURRENCY = '$';
+    const FREE_SHIPPING_THRESHOLD = 99;
+    const PREFERS_REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* STRICT ZERO-DUPLICATE IMAGE REGISTRY (24 Unique Product Photos + 7 Unique Category Photos) */
+    const PRODUCTS = [
+      // === TRENDING CLOTHES (10 UNIQUE SKUs) ===
+      { id: 1, name: 'Cathedral Wool Overcoat', group: 'Trending Clothes', category: 'Outerwear', gender: 'Women', price: 345, oldPrice: 440, colors: ['#0A0A0A', '#5E0A15'], sizes: ['XS', 'S', 'M', 'L'], image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=900&q=80', badge: 'TRENDING', featured3D: true, rating: 4.9, reviews: 118, description: 'Ankle-grazing Italian boiled wool overcoat with crimson satin lining and razor-sharp peaked lapels.' },
+      { id: 2, name: 'Blood Moon Cropped Leather Bomber', group: 'Trending Clothes', category: 'Outerwear', gender: 'Men', price: 385, oldPrice: 480, colors: ['#0A0A0A', '#2B282B'], sizes: ['S', 'M', 'L', 'XL'], image: 'https://images.unsplash.com/photo-1520975954732-35dd22299614?auto=format&fit=crop&w=900&q=80', badge: 'LIMITED', featured3D: true, rating: 4.9, reviews: 94, description: 'Full-grain drum-dyed calfskin cropped bomber with oxidized silver hardware and drop shoulders.' },
+      { id: 3, name: 'Distressed Gothic Trench', group: 'Trending Clothes', category: 'Outerwear', gender: 'Men', price: 325, oldPrice: 410, colors: ['#0A0A0A', '#5E0A15'], sizes: ['S', 'M', 'L', 'XL'], image: 'https://images.unsplash.com/photo-1544022613-e87ca75a784a?auto=format&fit=crop&w=900&q=80', badge: 'SALE -21%', featured3D: false, rating: 4.8, reviews: 76, description: 'Storm-flap architectural trench finished in waxed cotton-gabardine with antique gold buckles.' },
+      { id: 4, name: 'Corseted Dark Academia Blazer', group: 'Trending Clothes', category: 'Outerwear', gender: 'Women', price: 278, oldPrice: 350, colors: ['#0A0A0A', '#5E0A15'], sizes: ['XS', 'S', 'M', 'L'], image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=900&q=80', badge: 'NEW', featured3D: false, rating: 4.9, reviews: 63, description: 'Tailored hourglass blazer featuring boned corset waist seaming and embossed gold crest buttons.' },
+      { id: 5, name: 'Obsidian Mohair Distressed Knit', group: 'Trending Clothes', category: 'Knitwear', gender: 'Women', price: 168, oldPrice: 220, colors: ['#0A0A0A', '#D4AF37'], sizes: ['XS', 'S', 'M', 'L'], image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=900&q=80', badge: 'TRENDING', featured3D: true, rating: 4.9, reviews: 132, description: 'Brushed kid-mohair blend with intentional ladder distressing and antique gold lurex threads.' },
+      { id: 6, name: 'Gilded Ribbed Turtleneck', group: 'Trending Clothes', category: 'Knitwear', gender: 'Men', price: 145, oldPrice: null, colors: ['#0A0A0A', '#5E0A15', '#F5F2EC'], sizes: ['S', 'M', 'L', 'XL'], image: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=900&q=80', badge: 'NEW', featured3D: false, rating: 4.8, reviews: 58, description: 'Heavyweight merino rib-knit with extended thumbhole cuffs and sculptural high funnel neck.' },
+      { id: 7, name: 'Washed Charcoal Baggy Cargo Denim', group: 'Trending Clothes', category: 'Denim', gender: 'Men', price: 195, oldPrice: 250, colors: ['#2B282B', '#0A0A0A'], sizes: ['S', 'M', 'L', 'XL'], image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=900&q=80', badge: 'TRENDING', featured3D: false, rating: 4.9, reviews: 105, description: '15oz enzyme-washed Japanese denim with puddle-hem drape and 3D gusseted utility pockets.' },
+      { id: 8, name: 'Midnight Raw Selvedge Jeans', group: 'Trending Clothes', category: 'Denim', gender: 'Women', price: 178, oldPrice: 225, colors: ['#0A0A0A', '#2B282B'], sizes: ['XS', 'S', 'M', 'L'], image: 'https://images.unsplash.com/photo-1604176354204-9268737828e4?auto=format&fit=crop&w=900&q=80', badge: 'SALE -21%', featured3D: false, rating: 4.8, reviews: 81, description: 'Resin-waxed jet-black selvedge with crimson contrast bar-tacks and oxidized rivets.' },
+      { id: 9, name: 'Velvet Draped Hooded Jacket', group: 'Trending Clothes', category: 'Streetwear', gender: 'Men', price: 185, oldPrice: null, colors: ['#0A0A0A', '#5E0A15'], sizes: ['XS', 'S', 'M', 'L', 'XL'], image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=900&q=80', badge: 'NEW', featured3D: false, rating: 5.0, reviews: 149, description: '520GSM crushed velvet-fleece hybrid with double-lined oversized hood and gold zip hardware.' },
+      { id: 10, name: 'Asymmetric Lace-Up Corset Top', group: 'Trending Clothes', category: 'Streetwear', gender: 'Women', price: 128, oldPrice: 165, colors: ['#5E0A15', '#0A0A0A'], sizes: ['XS', 'S', 'M', 'L'], image: 'https://images.unsplash.com/photo-1578632292335-df3abbb0d586?auto=format&fit=crop&w=900&q=80', badge: 'LIMITED', featured3D: false, rating: 4.9, reviews: 74, description: 'Structured satin-twill corset top with gothic eyelet lacing and asymmetric draped hem.' },
+
+      // === FOOTWEAR (6 UNIQUE SKUs) ===
+      { id: 11, name: 'Cathedral Platform Combat Boots', group: 'Footwear', category: 'Footwear', gender: 'Women', price: 275, oldPrice: 345, colors: ['#0A0A0A'], sizes: ['S', 'M', 'L'], image: 'https://images.unsplash.com/photo-1605812860427-4024433a70fd?auto=format&fit=crop&w=900&q=80', badge: 'TRENDING', featured3D: true, rating: 4.9, reviews: 164, description: '55mm brutalist lug sole, Goodyear-welted matte black calfskin with antique gold speed hooks.' },
+      { id: 12, name: 'Obsidian Lug-Sole Leather Loafers', group: 'Footwear', category: 'Footwear', gender: 'Men', price: 225, oldPrice: 280, colors: ['#0A0A0A', '#5E0A15'], sizes: ['S', 'M', 'L', 'XL'], image: 'https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?auto=format&fit=crop&w=900&q=80', badge: 'NEW', featured3D: false, rating: 4.8, reviews: 88, description: 'Dark academia penny loafer elevated on a chunky Vibram-style serrated sole with gold bit.' },
+      { id: 13, name: 'Blood-Stitch Knee-High Moto Boots', group: 'Footwear', category: 'Footwear', gender: 'Women', price: 315, oldPrice: 395, colors: ['#0A0A0A', '#5E0A15'], sizes: ['XS', 'S', 'M', 'L'], image: 'https://images.unsplash.com/photo-1520639888713-7851133b1ed0?auto=format&fit=crop&w=900&q=80', badge: 'LIMITED', featured3D: true, rating: 4.9, reviews: 97, description: 'Knee-high harness moto boots finished with vampire-red welt stitching and heavy metal rings.' },
+      { id: 14, name: 'Sculptural Chunky Chelsea Boots', group: 'Footwear', category: 'Footwear', gender: 'Men', price: 248, oldPrice: null, colors: ['#0A0A0A', '#2B282B'], sizes: ['M', 'L', 'XL'], image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=900&q=80', badge: 'NEW', featured3D: false, rating: 4.8, reviews: 69, description: 'Square-toe sculpted leather boot with concealed blood-red elastic gore panels.' },
+      { id: 15, name: 'Nocturne Matte Leather Derby Shoes', group: 'Footwear', category: 'Footwear', gender: 'Men', price: 210, oldPrice: 265, colors: ['#0A0A0A'], sizes: ['S', 'M', 'L', 'XL'], image: 'https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&w=900&q=80', badge: 'SALE -21%', featured3D: false, rating: 4.7, reviews: 52, description: 'Architectural extended-welt formal derby cut from matte Italian leather for nocturnal tailoring.' },
+      { id: 16, name: 'Crimson-Sole Street Sneakers', group: 'Footwear', category: 'Footwear', gender: 'Men', price: 198, oldPrice: null, colors: ['#0A0A0A', '#5E0A15'], sizes: ['S', 'M', 'L', 'XL'], image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80', badge: 'TRENDING', featured3D: true, rating: 4.9, reviews: 141, description: 'Low-top paneled nubuck and leather street trainer anchored by a translucent blood-red outsole.' },
+
+      // === JEWELRY (8 UNIQUE SKUs) ===
+      { id: 17, name: 'Sovereign Signet Gold Ring', group: 'Jewelry', category: 'Jewelry', gender: 'Men', price: 88, oldPrice: 115, colors: ['#D4AF37', '#0A0A0A'], sizes: ['S', 'M', 'L'], image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=900&q=80', badge: 'TRENDING', featured3D: true, rating: 5.0, reviews: 178, description: '18k gold-vermeil over solid recycled 925 sterling silver with deeply engraved NOCTURNE crest.' },
+      { id: 18, name: 'Blood Garnet Gothic Pendant Necklace', group: 'Jewelry', category: 'Jewelry', gender: 'Women', price: 112, oldPrice: 145, colors: ['#5E0A15', '#D4AF37'], sizes: ['S', 'M'], image: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=900&q=80', badge: 'LIMITED', featured3D: true, rating: 4.9, reviews: 124, description: 'Faceted deep-crimson garnet set in a cathedral-claw gold bezel on a 20-inch box chain.' },
+      { id: 19, name: 'Obsidian Chain-Link Choker', group: 'Jewelry', category: 'Jewelry', gender: 'Women', price: 96, oldPrice: null, colors: ['#0A0A0A', '#D4AF37'], sizes: ['S', 'M'], image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=900&q=80', badge: 'NEW', featured3D: false, rating: 4.8, reviews: 83, description: 'Heavy Cuban-gothic interlocking links with T-bar toggle clasp in dual-tone gold and onyx.' },
+      { id: 20, name: 'Thorn-Carved Sterling Cuff Bracelet', group: 'Jewelry', category: 'Jewelry', gender: 'Men', price: 105, oldPrice: 138, colors: ['#D4AF37', '#2B282B'], sizes: ['S', 'M', 'L'], image: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=900&q=80', badge: 'SALE -24%', featured3D: false, rating: 4.9, reviews: 71, description: 'Hand-carved organic thorn motif cast in heavyweight oxidized metal with brushed gold highlights.' },
+      { id: 21, name: 'Gilded Crescent Drop Earrings', group: 'Jewelry', category: 'Jewelry', gender: 'Women', price: 78, oldPrice: null, colors: ['#D4AF37', '#5E0A15'], sizes: ['S', 'M'], image: 'https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=900&q=80', badge: 'NEW', featured3D: false, rating: 4.8, reviews: 66, description: 'Sculpted crescent-moon silhouettes suspended from hinged gold huggies with crimson crystal drops.' },
+      { id: 22, name: 'Stacked Vampire-Red Enamel Ring Set', group: 'Jewelry', category: 'Jewelry', gender: 'Women', price: 92, oldPrice: 120, colors: ['#5E0A15', '#D4AF37'], sizes: ['XS', 'S', 'M', 'L'], image: 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=900&q=80', badge: 'TRENDING', featured3D: true, rating: 4.9, reviews: 109, description: 'Set of 3 interlocking stacking bands inlaid with glossy blood-red cloisonné enamel and 18k gold.' },
+      { id: 23, name: 'Relic Cross Heavy Chain Necklace', group: 'Jewelry', category: 'Jewelry', gender: 'Men', price: 124, oldPrice: 160, colors: ['#D4AF37', '#0A0A0A'], sizes: ['S', 'M', 'L'], image: 'https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=900&q=80', badge: 'LIMITED', featured3D: false, rating: 4.9, reviews: 115, description: 'Architectural gothic relic pendant suspended on a weighted 22-inch curb chain.' },
+      { id: 24, name: 'Nocturne Monogrammed Ear Cuff', group: 'Jewelry', category: 'Jewelry', gender: 'Women', price: 62, oldPrice: null, colors: ['#D4AF37'], sizes: ['S', 'M'], image: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=900&q=80', badge: 'NEW', featured3D: false, rating: 4.7, reviews: 49, description: 'No-piercing sculptural double-band ear cuff stamped with micro NOCTURNE foil branding.' }
+    ];
+
+    /* 7 Unique Category Strip Photos */
+    const CATEGORIES = [
+      { name: 'Trending Clothes', count: 10, img: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80', filter: 'Trending Clothes' },
+      { name: 'Outerwear', count: 4, img: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80', filter: 'Outerwear' },
+      { name: 'Knitwear', count: 2, img: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=700&q=80', filter: 'Knitwear' },
+      { name: 'Denim', count: 2, img: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=700&q=80', filter: 'Denim' },
+      { name: 'Footwear', count: 6, img: 'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=700&q=80', filter: 'Footwear' },
+      { name: 'Jewelry', count: 8, img: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=700&q=80', filter: 'Jewelry' },
+      { name: 'Streetwear', count: 2, img: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=700&q=80', filter: 'Streetwear' }
+    ];
+
+    const REVIEWS = [
+      { quote: 'The Cathedral Overcoat and Platform Boots together make me feel unstoppable. Unreal weight.', author: 'MAYA K. // NYC', item: 'Cathedral Wool Overcoat' },
+      { quote: 'Sovereign Signet Ring has insane 18k weight—doesn’t tarnish, looks like an heirloom.', author: 'DEVON R. // LONDON', item: 'Sovereign Signet Gold Ring' },
+      { quote: 'Blood Garnet Pendant arrived in a matte-black velvet coffin box with gold wax seal. 10/10.', author: 'SORA T. // LA', item: 'Blood Garnet Pendant' },
+      { quote: 'Crimson-Sole Street Sneakers get compliments literally every night out. Zero break-in pain.', author: 'ELENA V. // BERLIN', item: 'Crimson-Sole Sneakers' },
+      { quote: 'Obsidian Mohair Knit + Baggy Cargo Denim is my entire Fall 26 uniform. Pure dark luxury.', author: 'JUDE M. // TORONTO', item: 'Obsidian Mohair Knit' }
+    ];
+
+    /* Persistent State */
+    const state = {
+      cart: JSON.parse(localStorage.getItem('nocturne_cart') || '[]'),
+      wishlist: JSON.parse(localStorage.getItem('nocturne_wishlist') || '[]'),
+      couponApplied: localStorage.getItem('nocturne_coupon') === 'BLOODMOON',
+      arrivalsTab: 'All',
+      shopFilters: { categories: [], size: null, color: null, maxPrice: 450, sort: 'featured', view: 'grid', limit: 9 }
+    };
+
+    const saveState = () => {
+      try {
+        localStorage.setItem('nocturne_cart', JSON.stringify(state.cart));
+        localStorage.setItem('nocturne_wishlist', JSON.stringify(state.wishlist));
+        localStorage.setItem('nocturne_coupon', state.couponApplied ? 'BLOODMOON' : '');
+      } catch (e) {}
+    };
+
+    const formatPrice = (num) => `${CURRENCY}${Number(num).toFixed(2)}`;
+
+    /* Toast Notifications (Zero alert/confirm) */
+    function showToast(message) {
+      const stack = document.getElementById('toast-stack');
+      const el = document.createElement('div');
+      el.className = 'toast-item';
+      el.innerHTML = message;
+      stack.appendChild(el);
+      setTimeout(() => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(8px)';
+        el.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        setTimeout(() => el.remove(), 320);
+      }, 3000);
+    }
+
+    /* Safe Clipboard Copy (works in iframes) */
+    function copyTextToClipboard(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast(`COPIED CODE <strong>${text}</strong> — 20% OFF AT CHECKOUT`);
+      } catch (err) {
+        showToast(`USE CODE <strong>${text}</strong> AT CHECKOUT`);
+      }
+      document.body.removeChild(ta);
+    }
+
+    /* ==========================================================================
+       PRODUCT CARD TEMPLATE (3D ANIMATED DEPTH, NO DUPLICATE IMAGE SWAP)
+       ========================================================================== */
+    function createProductCardHTML(p) {
+      const isWished = state.wishlist.includes(p.id);
+      const badgeClass = p.badge === 'LIMITED'
+        ? 'product-badge is-limited'
+        : p.badge === 'TRENDING'
+          ? 'product-badge is-trending'
+          : 'product-badge';
+      const swatches = p.colors.map(c => `<span class="swatch-dot" style="background:${c};" title="${c}"></span>`).join('');
+      const sizes = p.sizes.map((s, idx) => `<button type="button" class="size-chip-mini ${idx === 1 || p.sizes.length === 1 ? 'is-selected' : ''}" data-size="${s}">${s}</button>`).join('');
+
+      return `
+        <div class="product-card-scene">
+          <article class="product-card tilt-card ${p.featured3D ? 'is-floating-3d' : ''}" data-product-id="${p.id}">
+            <div class="card-glare" aria-hidden="true"></div>
+            <div class="product-media cursor-view-target" data-qv-trigger="${p.id}">
+              ${p.badge ? `<span class="${badgeClass}">${p.badge}</span>` : ''}
+              <button type="button" class="wishlist-btn ${isWished ? 'is-active' : ''}" data-wish-id="${p.id}" aria-label="Toggle wishlist for ${p.name}">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.2-8.4C1 9.4 2.7 5.5 6.3 5.5c2.1 0 3.7 1.2 4.7 2.8 1-1.6 2.6-2.8 4.7-2.8 3.6 0 5.3 3.9 3.5 7.1C19 16.5 12 21 12 21z"/></svg>
+              </button>
+              <img class="editorial-img img-front" loading="lazy" src="${p.image}" alt="${p.name} — ${p.category}" onerror="this.src='https://placehold.co/600x800/141214/D4AF37?text=NOCTURNE'" />
+              <div class="product-rim-overlay" aria-hidden="true"></div>
+              <div class="product-hover-bar">
+                <div class="size-chip-row">${sizes}</div>
+                <div class="hover-action-row">
+                  <button type="button" class="quick-add-btn" data-quick-add="${p.id}">Quick Add +</button>
+                  <button type="button" class="inspect-3d-btn" data-qv-trigger="${p.id}">3D View</button>
+                </div>
+              </div>
+            </div>
+            <div class="product-info">
+              <div class="product-top-meta">
+                <div class="swatch-row">${swatches}</div>
+                <span class="product-rating">&#9733; ${p.rating.toFixed(1)} (${p.reviews})</span>
+              </div>
+              <button type="button" class="product-name" data-qv-trigger="${p.id}">${p.name}</button>
+              <div class="product-price-row">
+                <span class="price-current">${formatPrice(p.price)}</span>
+                ${p.oldPrice ? `<span class="price-old">${formatPrice(p.oldPrice)}</span>` : ''}
+                <span class="font-mono" style="margin-left:auto;font-size:0.62rem;color:rgba(245,242,236,0.45);text-transform:uppercase;">${p.category}</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      `;
+    }
+
+    function bindTiltCards(container = document) {
+      if (PREFERS_REDUCED_MOTION || !window.matchMedia('(hover: hover)').matches) return;
+      container.querySelectorAll('.tilt-card').forEach(card => {
+        if (card.dataset.tiltBound) return;
+        card.dataset.tiltBound = '1';
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width;
+          const y = (e.clientY - rect.top) / rect.height;
+          const rotY = (x - 0.5) * 16;
+          const rotX = (0.5 - y) * 16;
+          card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(10px)`;
+          card.style.setProperty('--gx', `${x * 100}%`);
+          card.style.setProperty('--gy', `${y * 100}%`);
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
+        });
+      });
+    }
+
+    /* ==========================================================================
+       RENDER SECTIONS: CATEGORIES, NEW ARRIVALS, BEST SELLERS, FULL SHOP, REVIEWS
+       ========================================================================== */
+    function renderCategories() {
+      const el = document.getElementById('category-strip-grid');
+      el.innerHTML = CATEGORIES.map(c => `
+        <div class="cat-arch-card tilt-card" data-cat-jump="${c.filter || c.name}">
+          <div class="cat-arch-media img-grade-wrap">
+            <img class="editorial-img" loading="lazy" src="${c.img}" alt="${c.name} category" onerror="this.src='https://placehold.co/480x670/141214/D4AF37?text=${encodeURIComponent(c.name)}'" />
+          </div>
+          <div class="cat-arch-info">
+            <span class="cat-arch-name">${c.name}</span>
+            <span class="cat-arch-count">${String(c.count).padStart(2, '0')}</span>
+          </div>
+        </div>
+      `).join('');
+      bindTiltCards(el);
+    }
+
+    function renderNewArrivals() {
+      const grid = document.getElementById('new-arrivals-grid');
+      const tab = state.arrivalsTab;
+      const filtered = PRODUCTS.filter(p => {
+        if (tab === 'All') return true;
+        if (tab === 'Trending Clothes') return p.group === 'Trending Clothes';
+        return p.category === tab || p.group === tab;
+      }).slice(0, 8);
+      grid.innerHTML = filtered.map(createProductCardHTML).join('');
+      bindTiltCards(grid);
+    }
+
+    function renderBestSellers() {
+      const track = document.getElementById('bestseller-track');
+      const top = [...PRODUCTS].sort((a, b) => b.reviews - a.reviews).slice(0, 10);
+      track.innerHTML = top.map(p => `<div class="carousel-slide">${createProductCardHTML(p)}</div>`).join('');
+      bindTiltCards(track);
+    }
+
+    function renderReviews() {
+      const track = document.getElementById('reviews-marquee-track');
+      const doubled = [...REVIEWS, ...REVIEWS];
+      track.innerHTML = doubled.map(r => `
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-quote">&ldquo;${r.quote}&rdquo;</p>
+          <div class="review-author">
+            <span>${r.author}</span>
+            <span class="verified-pill">VERIFIED</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderShopSidebarCategories() {
+      const cats = ['Trending Clothes', 'Outerwear', 'Knitwear', 'Denim', 'Streetwear', 'Footwear', 'Jewelry'];
+      const wrap = document.getElementById('filter-categories');
+      wrap.innerHTML = cats.map(c => `
+        <label class="checkbox-label">
+          <input type="checkbox" value="${c}" class="cat-filter-cb" />
+          <span>${c}</span>
+        </label>
+      `).join('');
+    }
+
+    function renderShopCatalog() {
+      const { categories, size, color, maxPrice, sort, view, limit } = state.shopFilters;
+      let list = PRODUCTS.filter(p => {
+        if (categories.length && !categories.includes(p.category) && !categories.includes(p.group)) return false;
+        if (size && !p.sizes.includes(size)) return false;
+        if (color && !p.colors.includes(color)) return false;
+        if (p.price > maxPrice) return false;
+        return true;
+      });
+
+      if (sort === 'price-asc') list.sort((a, b) => a.price - b.price);
+      else if (sort === 'price-desc') list.sort((a, b) => b.price - a.price);
+      else if (sort === 'rating') list.sort((a, b) => b.rating - a.rating);
+
+      const grid = document.getElementById('shop-catalog-grid');
+      grid.classList.toggle('is-list', view === 'list');
+
+      const visible = list.slice(0, limit);
+      if (!visible.length) {
+        grid.innerHTML = `<div style="grid-column:1/-1;padding:48px;text-align:center;border:1px solid var(--hairline-gold);color:rgba(245,242,236,0.7);">No silhouettes match those filters. Try resetting.</div>`;
+      } else {
+        grid.innerHTML = visible.map(createProductCardHTML).join('');
+        bindTiltCards(grid);
+      }
+
+      document.getElementById('shop-result-count').textContent = `Showing ${visible.length} of ${list.length} pieces`;
+      const loadBtn = document.getElementById('load-more-btn');
+      loadBtn.style.display = visible.length < list.length ? 'inline-flex' : 'none';
+    }
+
+    /* ==========================================================================
+       CART & WISHLIST FUNCTIONALITY
+       ========================================================================== */
+    function addToCart(productId, size = 'M') {
+      const product = PRODUCTS.find(p => p.id === Number(productId));
+      if (!product) return;
+      const existing = state.cart.find(i => i.id === product.id && i.size === size);
+      if (existing) existing.qty += 1;
+      else state.cart.push({ id: product.id, size, qty: 1 });
+      saveState();
+      updateCartUI();
+      showToast(`ADDED <strong>${product.name}</strong> (${size}) TO BAG`);
+    }
+
+    function updateCartQty(id, size, delta) {
+      const idx = state.cart.findIndex(i => i.id === id && i.size === size);
+      if (idx === -1) return;
+      state.cart[idx].qty += delta;
+      if (state.cart[idx].qty <= 0) state.cart.splice(idx, 1);
+      saveState();
+      updateCartUI();
+    }
+
+    function toggleWishlist(productId) {
+      const id = Number(productId);
+      const idx = state.wishlist.indexOf(id);
+      const product = PRODUCTS.find(p => p.id === id);
+      if (idx > -1) {
+        state.wishlist.splice(idx, 1);
+        showToast(`REMOVED FROM SAVED`);
+      } else {
+        state.wishlist.push(id);
+        showToast(`SAVED <strong>${product ? product.name : 'PIECE'}</strong> TO WISHLIST`);
+      }
+      saveState();
+      updateWishlistUI();
+      document.querySelectorAll(`[data-wish-id="${id}"]`).forEach(btn => {
+        btn.classList.toggle('is-active', state.wishlist.includes(id));
+      });
+    }
+
+    function updateCartUI() {
+      const totalQty = state.cart.reduce((s, i) => s + i.qty, 0);
+      document.getElementById('cart-count').textContent = totalQty;
+      document.getElementById('cart-drawer-count').textContent = totalQty;
+
+      const container = document.getElementById('cart-items-container');
+      let subtotal = 0;
+
+      if (!state.cart.length) {
+        container.innerHTML = `<div style="margin:auto;text-align:center;color:rgba(245,242,236,0.55);font-family:var(--font-mono);font-size:0.8rem;">YOUR BAG IS EMPTY.<br/>THE NIGHT AWAITS.</div>`;
+      } else {
+        container.innerHTML = state.cart.map(item => {
+          const p = PRODUCTS.find(prod => prod.id === item.id);
+          if (!p) return '';
+          subtotal += p.price * item.qty;
+          return `
+            <div class="cart-item">
+              <img src="${p.image}" alt="${p.name}" />
+              <div style="display:flex;flex-direction:column;justify-content:space-between;">
+                <div>
+                  <div style="display:flex;justify-content:space-between;gap:8px;">
+                    <strong style="font-size:0.9rem;">${p.name}</strong>
+                    <button type="button" data-cart-remove="${p.id}|${item.size}" aria-label="Remove item" style="color:rgba(245,242,236,0.5);font-size:0.75rem;">&times;</button>
+                  </div>
+                  <div class="font-mono" style="font-size:0.72rem;color:rgba(245,242,236,0.6);margin-top:4px;">SIZE: ${item.size}</div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;">
+                  <div class="qty-control">
+                    <button type="button" data-cart-qty="${p.id}|${item.size}|-1" aria-label="Decrease quantity">&minus;</button>
+                    <span>${item.qty}</span>
+                    <button type="button" data-cart-qty="${p.id}|${item.size}|1" aria-label="Increase quantity">+</button>
+                  </div>
+                  <span class="font-mono text-gold-foil" style="font-weight:600;">${formatPrice(p.price * item.qty)}</span>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      const discount = state.couponApplied ? subtotal * 0.2 : 0;
+      const finalTotal = Math.max(0, subtotal - discount);
+
+      const discRow = document.getElementById('cart-discount-row');
+      discRow.style.display = state.couponApplied && subtotal > 0 ? 'flex' : 'none';
+      document.getElementById('cart-discount-val').textContent = `-${formatPrice(discount)}`;
+      document.getElementById('cart-subtotal-val').textContent = formatPrice(finalTotal);
+
+      const remaining = Math.max(0, FREE_SHIPPING_THRESHOLD - finalTotal);
+      const pct = Math.min(100, (finalTotal / FREE_SHIPPING_THRESHOLD) * 100);
+      document.getElementById('shipping-progress-fill').style.width = `${pct}%`;
+      document.getElementById('shipping-bar-text').innerHTML = remaining === 0 && finalTotal > 0
+        ? `<span style="color:var(--gold-soft);">&#10022; UNLOCKED: FREE EXPRESS SHIPPING</span>`
+        : `Add <strong>${formatPrice(remaining)}</strong> more for FREE Express Shipping`;
+    }
+
+    function updateWishlistUI() {
+      document.getElementById('wishlist-count').textContent = state.wishlist.length;
+      document.getElementById('wishlist-drawer-count').textContent = state.wishlist.length;
+      const container = document.getElementById('wishlist-items-container');
+      if (!state.wishlist.length) {
+        container.innerHTML = `<div style="margin:auto;text-align:center;color:rgba(245,242,236,0.55);font-family:var(--font-mono);font-size:0.8rem;">NO SAVED PIECES YET.</div>`;
+        return;
+      }
+      container.innerHTML = state.wishlist.map(id => {
+        const p = PRODUCTS.find(prod => prod.id === id);
+        if (!p) return '';
+        return `
+          <div class="cart-item">
+            <img src="${p.image}" alt="${p.name}" />
+            <div style="display:flex;flex-direction:column;justify-content:space-between;">
+              <div>
+                <strong style="font-size:0.9rem;">${p.name}</strong>
+                <div class="font-mono text-gold-foil" style="font-size:0.85rem;margin-top:4px;">${formatPrice(p.price)}</div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px;">
+                <button type="button" class="quick-add-btn" data-move-bag="${p.id}" style="flex:1;">Add to Bag</button>
+                <button type="button" data-wish-id="${p.id}" style="padding:0 10px;border:1px solid var(--hairline-white);font-size:0.7rem;">&times;</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /* ==========================================================================
+       DEDICATED THREE.JS "3D INSPECT" STUDIO MODAL (360° DRAG + RIM LIGHTING)
+       ========================================================================== */
+    const qv3D = {
+      renderer: null,
+      scene: null,
+      camera: null,
+      cardGroup: null,
+      frontMat: null,
+      dustPoints: null,
+      isDragging: false,
+      prevX: 0,
+      prevY: 0,
+      rotY: 0,
+      rotX: 0,
+      velY: 0.008,
+      velX: 0,
+      active: false,
+      rafId: null
+    };
+
+    function initQuickView3DStudio() {
+      const stage = document.getElementById('qv-3d-stage');
+      const canvas = document.getElementById('qv-3d-canvas');
+      try {
+        qv3D.renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      } catch (e) {
+        return;
+      }
+      qv3D.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      qv3D.scene = new THREE.Scene();
+      qv3D.camera = new THREE.PerspectiveCamera(38, 3 / 4, 0.1, 100);
+      qv3D.camera.position.z = 5.4;
+
+      qv3D.cardGroup = new THREE.Group();
+      qv3D.scene.add(qv3D.cardGroup);
+
+      // Sculpted beveled metallic gold showcase frame
+      const goldEdgeMat = new THREE.MeshStandardMaterial({
+        color: 0xD4AF37,
+        metalness: 0.92,
+        roughness: 0.22,
+        emissive: 0x221704,
+        emissiveIntensity: 0.25
+      });
+
+      const backMat = new THREE.MeshStandardMaterial({
+        color: 0x141214,
+        metalness: 0.65,
+        roughness: 0.35,
+        emissive: 0x3A060E,
+        emissiveIntensity: 0.25
+      });
+
+      qv3D.frontMat = new THREE.MeshStandardMaterial({
+        color: 0xffffff,
+        metalness: 0.15,
+        roughness: 0.38
+      });
+
+      const slabGeo = new THREE.BoxGeometry(2.35, 3.15, 0.14);
+      const slabMesh = new THREE.Mesh(slabGeo, [
+        goldEdgeMat, goldEdgeMat, goldEdgeMat, goldEdgeMat,
+        qv3D.frontMat, backMat
+      ]);
+      qv3D.cardGroup.add(slabMesh);
+
+      // Subtle floating gold rim wireframe accent
+      const rimGeo = new THREE.EdgesGeometry(new THREE.BoxGeometry(2.43, 3.23, 0.18));
+      const rimLine = new THREE.LineSegments(rimGeo, new THREE.LineBasicMaterial({ color: 0xD4AF37, transparent: true, opacity: 0.65 }));
+      qv3D.cardGroup.add(rimLine);
+
+      // Orbiting gold studio dust particles
+      const pts = [];
+      for (let i = 0; i < 60; i++) {
+        pts.push((Math.random() - 0.5) * 5.2, (Math.random() - 0.5) * 5.2, (Math.random() - 0.5) * 2.4);
+      }
+      const pGeo = new THREE.BufferGeometry();
+      pGeo.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
+      qv3D.dustPoints = new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0xE8C96B, size: 0.045, transparent: true, opacity: 0.65 }));
+      qv3D.scene.add(qv3D.dustPoints);
+
+      // Dynamic Gold Key + Vampire-Red Studio Rim Lights
+      qv3D.scene.add(new THREE.AmbientLight(0xF5F2EC, 0.95));
+      const keyLight = new THREE.DirectionalLight(0xE8C96B, 1.8);
+      keyLight.position.set(3.5, 4, 5);
+      qv3D.scene.add(keyLight);
+
+      const redRim = new THREE.PointLight(0xE01E37, 6.0, 14);
+      redRim.position.set(-3.4, -1.2, 2.5);
+      qv3D.scene.add(redRim);
+
+      const goldRim = new THREE.PointLight(0xD4AF37, 4.5, 14);
+      goldRim.position.set(3.2, 2.2, -2.2);
+      qv3D.scene.add(goldRim);
+
+      const onDown = (x, y) => {
+        qv3D.isDragging = true;
+        qv3D.prevX = x;
+        qv3D.prevY = y;
+        qv3D.velX = 0;
+        qv3D.velY = 0;
+        stage.classList.add('is-dragging');
+      };
+      const onMove = (x, y) => {
+        if (!qv3D.isDragging) return;
+        const dx = x - qv3D.prevX;
+        const dy = y - qv3D.prevY;
+        qv3D.prevX = x;
+        qv3D.prevY = y;
+        qv3D.velY = dx * 0.012;
+        qv3D.velX = dy * 0.008;
+        qv3D.rotY += qv3D.velY;
+        qv3D.rotX = Math.max(-0.55, Math.min(0.55, qv3D.rotX + qv3D.velX));
+      };
+      const onUp = () => {
+        qv3D.isDragging = false;
+        stage.classList.remove('is-dragging');
+      };
+
+      stage.addEventListener('mousedown', (e) => onDown(e.clientX, e.clientY));
+      window.addEventListener('mousemove', (e) => onMove(e.clientX, e.clientY));
+      window.addEventListener('mouseup', onUp);
+      stage.addEventListener('touchstart', (e) => onDown(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
+      stage.addEventListener('touchmove', (e) => onMove(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
+      stage.addEventListener('touchend', onUp);
+
+      const animate = () => {
+        qv3D.rafId = requestAnimationFrame(animate);
+        if (!qv3D.active || document.hidden) return;
+        if (!qv3D.isDragging) {
+          qv3D.velY *= 0.94;
+          qv3D.velX *= 0.92;
+          qv3D.rotY += qv3D.velY + (PREFERS_REDUCED_MOTION ? 0 : 0.004);
+          qv3D.rotX = Math.max(-0.55, Math.min(0.55, qv3D.rotX + qv3D.velX));
+        }
+        qv3D.cardGroup.rotation.y = qv3D.rotY;
+        qv3D.cardGroup.rotation.x = qv3D.rotX;
+        qv3D.cardGroup.position.y = PREFERS_REDUCED_MOTION ? 0 : Math.sin(Date.now() * 0.0022) * 0.08;
+        qv3D.dustPoints.rotation.y -= 0.0025;
+        qv3D.renderer.render(qv3D.scene, qv3D.camera);
+      };
+      animate();
+    }
+
+    function openQuickView(productId) {
+      const p = PRODUCTS.find(prod => prod.id === Number(productId));
+      if (!p) return;
+
+      const stage = document.getElementById('qv-3d-stage');
+      const fallback = document.getElementById('qv-3d-fallback');
+      fallback.src = p.image;
+      fallback.alt = p.name;
+
+      // Load product photo onto Three.js 3D showcase card
+      if (qv3D.renderer && qv3D.frontMat) {
+        const loader = new THREE.TextureLoader();
+        loader.setCrossOrigin('anonymous');
+        loader.load(p.image, (tex) => {
+          tex.colorSpace = THREE.SRGBColorSpace;
+          qv3D.frontMat.map = tex;
+          qv3D.frontMat.needsUpdate = true;
+        });
+        qv3D.rotY = -0.22;
+        qv3D.rotX = 0.06;
+        qv3D.velY = 0.014;
+        qv3D.active = true;
+        setTimeout(() => {
+          const w = stage.clientWidth || 420;
+          const h = stage.clientHeight || 540;
+          qv3D.renderer.setSize(w, h, false);
+          qv3D.camera.aspect = w / h;
+          qv3D.camera.updateProjectionMatrix();
+        }, 40);
+      }
+
+      let selectedSize = p.sizes[1] || p.sizes[0];
+      let selectedColor = p.colors[0];
+      const details = document.getElementById('qv-details');
+      details.innerHTML = `
+        <span class="font-mono" style="font-size:0.72rem;color:var(--gold);letter-spacing:0.18em;text-transform:uppercase;">3D STUDIO INSPECT // ${p.group} &bull; ${p.category}</span>
+        <h3 class="font-display" style="font-size:clamp(1.5rem,3vw,2.1rem);">${p.name}</h3>
+        <div style="display:flex;align-items:baseline;gap:14px;font-family:var(--font-mono);">
+          <span class="text-gold-foil" style="font-size:1.5rem;font-weight:600;">${formatPrice(p.price)}</span>
+          ${p.oldPrice ? `<span class="price-old">${formatPrice(p.oldPrice)}</span>` : ''}
+          <span style="margin-left:auto;color:var(--gold);font-size:0.8rem;">&#9733; ${p.rating} (${p.reviews})</span>
+        </div>
+        <p style="font-size:0.92rem;color:rgba(245,242,236,0.78);">${p.description}</p>
+        <div>
+          <div class="font-mono" style="font-size:0.7rem;color:var(--gold);margin-bottom:8px;letter-spacing:0.14em;">FINISH / COLOR</div>
+          <div style="display:flex;gap:10px;" id="qv-color-btns">
+            ${p.colors.map((c, idx) => `<button type="button" class="color-filter-btn ${idx === 0 ? 'is-active' : ''}" data-qv-color="${c}" style="background:${c};" aria-label="Select color ${c}"></button>`).join('')}
+          </div>
+        </div>
+        <div>
+          <div class="font-mono" style="font-size:0.7rem;color:var(--gold);margin-bottom:8px;letter-spacing:0.14em;">SELECT SIZE</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;" id="qv-size-btns">
+            ${p.sizes.map(s => `<button type="button" class="size-filter-btn ${s === selectedSize ? 'is-active' : ''}" data-qv-size="${s}">${s}</button>`).join('')}
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:auto;padding-top:12px;">
+          <button type="button" class="btn btn-red" id="qv-add-btn" style="flex:1;">Add to Bag &mdash; ${formatPrice(p.price)}</button>
+        </div>
+      `;
+
+      details.querySelectorAll('[data-qv-size]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          selectedSize = btn.dataset.qvSize;
+          details.querySelectorAll('[data-qv-size]').forEach(b => b.classList.remove('is-active'));
+          btn.classList.add('is-active');
+        });
+      });
+
+      details.querySelectorAll('[data-qv-color]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          selectedColor = btn.dataset.qvColor;
+          details.querySelectorAll('[data-qv-color]').forEach(b => b.classList.remove('is-active'));
+          btn.classList.add('is-active');
+        });
+      });
+
+      document.getElementById('qv-add-btn').addEventListener('click', () => {
+        addToCart(p.id, selectedSize);
+        closeAllOverlays();
+        openDrawer('cart-drawer');
+      });
+
+      document.getElementById('qv-modal').classList.add('is-open');
+      document.body.classList.add('no-scroll');
+    }
+
+    /* ==========================================================================
+       BEST SELLERS DRAGGABLE INERTIA CAROUSEL
+       ========================================================================== */
+    function initBestSellerCarousel() {
+      const viewport = document.getElementById('bestseller-viewport');
+      const track = document.getElementById('bestseller-track');
+      const progress = document.getElementById('bestseller-progress');
+      let pos = 0, vel = 0, isDown = false, startX = 0, rafId = null;
+
+      const getMax = () => Math.max(0, track.scrollWidth - viewport.clientWidth);
+
+      const renderPos = () => {
+        const max = getMax();
+        pos = Math.max(-max, Math.min(0, pos));
+        track.style.transform = `translate3d(${pos}px, 0, 0)`;
+        const pct = max > 0 ? Math.abs(pos) / max : 0;
+        progress.style.width = `${18 + pct * 82}%`;
+      };
+
+      const inertia = () => {
+        if (!isDown) {
+          vel *= 0.93;
+          pos += vel;
+          renderPos();
+          if (Math.abs(vel) > 0.25) rafId = requestAnimationFrame(inertia);
+        }
+      };
+
+      viewport.addEventListener('mousedown', (e) => {
+        if (e.target.closest('button')) return;
+        isDown = true;
+        startX = e.clientX;
+        vel = 0;
+        viewport.classList.add('is-dragging');
+      });
+      window.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        const dx = e.clientX - startX;
+        startX = e.clientX;
+        vel = dx;
+        pos += dx;
+        renderPos();
+      });
+      window.addEventListener('mouseup', () => {
+        if (!isDown) return;
+        isDown = false;
+        viewport.classList.remove('is-dragging');
+        cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(inertia);
+      });
+
+      viewport.addEventListener('touchstart', (e) => { isDown = true; startX = e.touches[0].clientX; vel = 0; }, { passive: true });
+      viewport.addEventListener('touchmove', (e) => {
+        if (!isDown) return;
+        const dx = e.touches[0].clientX - startX;
+        startX = e.touches[0].clientX;
+        vel = dx;
+        pos += dx;
+        renderPos();
+      }, { passive: true });
+      viewport.addEventListener('touchend', () => {
+        isDown = false;
+        cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(inertia);
+      });
+    }
+
+    /* ==========================================================================
+       3D & CANVAS EFFECTS (HERO WEBGL RIPPLE, HERO LEAVES, 3D GOLD RING, CURSOR)
+       ========================================================================== */
+    let globalScrollVel = 0;
+
+    /* 1. HERO THREE.JS RIPPLE + RGB SPLIT SHADER */
+    function initHeroWebGL() {
+      if (PREFERS_REDUCED_MOTION || typeof THREE === 'undefined') return;
+      const canvas = document.getElementById('hero-webgl-canvas');
+      const section = document.getElementById('hero-section');
+      let renderer;
+      try {
+        renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' });
+      } catch (e) {
+        return; // Graceful fallback to static hero image
+      }
+
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      const scene = new THREE.Scene();
+      const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+      const uniforms = {
+        u_time: { value: 0 },
+        u_mouse: { value: new THREE.Vector2(0.5, 0.5) },
+        u_vel: { value: 0 },
+        u_scroll: { value: 0 },
+        u_tex: { value: null },
+        u_res: { value: new THREE.Vector2(section.clientWidth, section.clientHeight) }
+      };
+
+      const loader = new THREE.TextureLoader();
+      loader.setCrossOrigin('anonymous');
+      const heroUrl = document.getElementById('hero-fallback-img').src;
+
+      loader.load(heroUrl, (tex) => {
+        tex.minFilter = THREE.LinearFilter;
+        uniforms.u_tex.value = tex;
+
+        const material = new THREE.ShaderMaterial({
+          uniforms,
+          vertexShader: `
+            varying vec2 vUv;
+            void main() {
+              vUv = uv;
+              gl_Position = vec4(position, 1.0);
+            }
+          `,
+          fragmentShader: `
+            precision mediump float;
+            varying vec2 vUv;
+            uniform sampler2D u_tex;
+            uniform float u_time;
+            uniform vec2 u_mouse;
+            uniform float u_vel;
+            uniform float u_scroll;
+
+            float wave(vec2 p, float t) {
+              return sin(p.x * 8.0 + t * 1.4) * cos(p.y * 6.0 - t * 1.1) * 0.5;
+            }
+
+            void main() {
+              vec2 uv = vUv;
+              float dist = distance(uv, u_mouse);
+              float ripple = exp(-dist * 4.5) * sin(dist * 26.0 - u_time * 4.5) * (0.012 + u_vel * 0.025);
+              float silk = wave(uv, u_time) * (0.004 + abs(u_scroll) * 0.002);
+              vec2 displaced = uv + vec2(ripple + silk, ripple - silk * 0.6);
+
+              float rgbShift = min(0.016, u_vel * 0.018);
+              float r = texture2D(u_tex, displaced + vec2(rgbShift, 0.0)).r;
+              float g = texture2D(u_tex, displaced).g;
+              float b = texture2D(u_tex, displaced - vec2(rgbShift, 0.0)).b;
+
+              vec3 col = vec3(r, g, b);
+              // Editorial dark grade
+              float lum = dot(col, vec3(0.299, 0.587, 0.114));
+              col = mix(vec3(lum), col, 0.78);
+              col = (col - 0.5) * 1.12 + 0.42;
+              col += vec3(0.04, 0.0, 0.01);
+              gl_FragColor = vec4(col, 1.0);
+            }
+          `
+        });
+
+        const mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
+        scene.add(mesh);
+        canvas.classList.add('is-ready');
+
+        const resize = () => {
+          const w = section.clientWidth;
+          const h = section.clientHeight;
+          renderer.setSize(w, h, false);
+          uniforms.u_res.value.set(w, h);
+        };
+        resize();
+        window.addEventListener('resize', resize);
+
+        let lastX = 0.5, lastY = 0.5, isVisible = true;
+        section.addEventListener('mousemove', (e) => {
+          const rect = section.getBoundingClientRect();
+          const nx = (e.clientX - rect.left) / rect.width;
+          const ny = 1.0 - (e.clientY - rect.top) / rect.height;
+          const v = Math.hypot(nx - lastX, ny - lastY) * 14;
+          uniforms.u_vel.value = Math.min(1.5, uniforms.u_vel.value + v);
+          uniforms.u_mouse.value.set(nx, ny);
+          lastX = nx; lastY = ny;
+        });
+
+        const io = new IntersectionObserver((entries) => { isVisible = entries[0].isIntersecting; });
+        io.observe(section);
+
+        const clock = new THREE.Clock();
+        const animate = () => {
+          requestAnimationFrame(animate);
+          if (document.hidden || !isVisible) return;
+          uniforms.u_time.value = clock.getElapsedTime();
+          uniforms.u_vel.value *= 0.92;
+          uniforms.u_scroll.value += (globalScrollVel * 0.05 - uniforms.u_scroll.value) * 0.1;
+          renderer.render(scene, camera);
+        };
+        animate();
+      }, undefined, () => {
+        // Fallback stays visible automatically
+      });
+    }
+
+    /* 2. HERO CANVAS 2D AUTUMN LEAVES & FLOATING EMBERS */
+    function initHeroParticles() {
+      if (PREFERS_REDUCED_MOTION) return;
+      const canvas = document.getElementById('hero-particles-canvas');
+      const section = document.getElementById('hero-section');
+      const ctx = canvas.getContext('2d');
+      let w = 0, h = 0, isVisible = true;
+
+      const resize = () => {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = section.clientWidth;
+        h = section.clientHeight;
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      };
+      resize();
+      window.addEventListener('resize', resize);
+
+      const particles = Array.from({ length: 58 }, (_, i) => {
+        const isEmber = i % 3 === 0;
+        const depth = Math.random(); // 0 far, 1 near
+        return {
+          isEmber,
+          x: Math.random() * w,
+          y: Math.random() * h,
+          size: isEmber ? (1.5 + depth * 2.5) : (5 + depth * 9),
+          vy: isEmber ? -(0.35 + depth * 0.8) : (0.55 + depth * 1.15),
+          vx: (Math.random() - 0.5) * 0.6,
+          rot: Math.random() * Math.PI * 2,
+          vrot: (Math.random() - 0.5) * 0.03,
+          depth,
+          color: isEmber
+            ? (Math.random() > 0.4 ? '#E01E37' : '#E8C96B')
+            : (Math.random() > 0.35 ? '#8A0F1E' : '#D4AF37')
+        };
+      });
+
+      const io = new IntersectionObserver((entries) => { isVisible = entries[0].isIntersecting; });
+      io.observe(section);
+
+      const tick = () => {
+        requestAnimationFrame(tick);
+        if (document.hidden || !isVisible) return;
+        ctx.clearRect(0, 0, w, h);
+
+        const wind = Math.max(-4, Math.min(4, globalScrollVel * 0.08));
+        for (const p of particles) {
+          p.x += p.vx + wind * (0.4 + p.depth);
+          p.y += p.vy;
+          p.rot += p.vrot;
+
+          if (p.y > h + 20) { p.y = -20; p.x = Math.random() * w; }
+          if (p.y < -20) { p.y = h + 20; p.x = Math.random() * w; }
+          if (p.x > w + 20) p.x = -20;
+          if (p.x < -20) p.x = w + 20;
+
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot);
+          ctx.globalAlpha = 0.28 + p.depth * 0.55;
+
+          if (p.isEmber) {
+            ctx.fillStyle = p.color;
+            ctx.shadowColor = p.color;
+            ctx.shadowBlur = 8;
+            ctx.beginPath();
+            ctx.arc(0, 0, p.size, 0, Math.PI * 2);
+            ctx.fill();
+          } else {
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.ellipse(0, 0, p.size, p.size * 0.42, 0, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+      };
+      tick();
+    }
+
+    /* 3. OFFER SECTION THREE.JS 3D METALLIC GOLD "N" MONOGRAM RING */
+    function initOffer3DRing() {
+      if (typeof THREE === 'undefined') return;
+      const canvas = document.getElementById('offer-ring-canvas');
+      const container = canvas.parentElement;
+      let renderer;
+      try {
+        renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      } catch (e) { return; }
+
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+      camera.position.z = 5.2;
+
+      const group = new THREE.Group();
+      scene.add(group);
+
+      const goldMat = new THREE.MeshStandardMaterial({
+        color: 0xD4AF37,
+        metalness: 0.92,
+        roughness: 0.22,
+        emissive: 0x2B1E05,
+        emissiveIntensity: 0.25
+      });
+
+      // Outer sculpted torus ring
+      const torus = new THREE.Mesh(new THREE.TorusGeometry(1.55, 0.16, 28, 96), goldMat);
+      group.add(torus);
+
+      // Inner delicate ring
+      const innerRing = new THREE.Mesh(new THREE.TorusGeometry(1.22, 0.03, 16, 72), goldMat);
+      group.add(innerRing);
+
+      // Sculpted 3D "N" Monogram in the center
+      const nGroup = new THREE.Group();
+      const barLeft = new THREE.Mesh(new THREE.BoxGeometry(0.18, 1.35, 0.2), goldMat);
+      barLeft.position.x = -0.44;
+      const barRight = new THREE.Mesh(new THREE.BoxGeometry(0.18, 1.35, 0.2), goldMat);
+      barRight.position.x = 0.44;
+      const barDiag = new THREE.Mesh(new THREE.BoxGeometry(0.18, 1.56, 0.2), goldMat);
+      barDiag.rotation.z = 0.56;
+      nGroup.add(barLeft, barRight, barDiag);
+      group.add(nGroup);
+
+      // Dramatic gold key + vampire-red rim lights
+      scene.add(new THREE.AmbientLight(0xF5F2EC, 0.55));
+      const keyLight = new THREE.DirectionalLight(0xE8C96B, 2.2);
+      keyLight.position.set(4, 5, 5);
+      scene.add(keyLight);
+
+      const redRim1 = new THREE.PointLight(0xE01E37, 4.5, 12);
+      redRim1.position.set(-3.2, -1.8, 2.2);
+      scene.add(redRim1);
+
+      const redRim2 = new THREE.PointLight(0x8A0F1E, 3.5, 10);
+      redRim2.position.set(3.2, 2.4, -2.0);
+      scene.add(redRim2);
+
+      const resize = () => {
+        const w = container.clientWidth;
+        const h = container.clientHeight || w;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      };
+      resize();
+      window.addEventListener('resize', resize);
+
+      let isVisible = true;
+      const io = new IntersectionObserver((entries) => { isVisible = entries[0].isIntersecting; });
+      io.observe(container);
+
+      const animate = () => {
+        requestAnimationFrame(animate);
+        if (document.hidden || !isVisible) return;
+        if (!PREFERS_REDUCED_MOTION) {
+          group.rotation.y += 0.009;
+          group.rotation.x = Math.sin(Date.now() * 0.001) * 0.22;
+          innerRing.rotation.z -= 0.012;
+        }
+        renderer.render(scene, camera);
+      };
+      animate();
+    }
+
+    /* 4. CUSTOM CURSOR + GOLD-DUST TRAIL (DESKTOP ONLY) */
+    function initCustomCursor() {
+      if (PREFERS_REDUCED_MOTION || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      document.body.classList.add('has-custom-cursor');
+
+      const dot = document.getElementById('cursor-dot');
+      const ring = document.getElementById('cursor-ring');
+      const canvas = document.getElementById('cursor-trail-canvas');
+      const ctx = canvas.getContext('2d');
+
+      let mx = -100, my = -100, rx = -100, ry = -100;
+      const dust = [];
+
+      const resize = () => {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      };
+      resize();
+      window.addEventListener('resize', resize);
+
+      window.addEventListener('mousemove', (e) => {
+        mx = e.clientX;
+        my = e.clientY;
+        dot.style.left = `${mx}px`;
+        dot.style.top = `${my}px`;
+
+        if (dust.length < 28) {
+          dust.push({ x: mx, y: my, alpha: 0.65, size: Math.random() * 2 + 1 });
+        }
+
+        const target = e.target;
+        const isView = target.closest('.cursor-view-target');
+        const isInteractive = target.closest('a, button, input, select, .hotspot-dot');
+        ring.classList.toggle('is-view', Boolean(isView));
+        ring.classList.toggle('is-pointer', Boolean(!isView && isInteractive));
+      });
+
+      const loop = () => {
+        requestAnimationFrame(loop);
+        if (document.hidden) return;
+        rx += (mx - rx) * 0.16;
+        ry += (my - ry) * 0.16;
+        ring.style.left = `${rx}px`;
+        ring.style.top = `${ry}px`;
+
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        for (let i = dust.length - 1; i >= 0; i--) {
+          const d = dust[i];
+          d.alpha -= 0.032;
+          d.y += 0.35;
+          if (d.alpha <= 0) { dust.splice(i, 1); continue; }
+          ctx.fillStyle = `rgba(212, 175, 55, ${d.alpha})`;
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, d.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      };
+      loop();
+    }
+
+    /* ==========================================================================
+       MAGNETIC BUTTONS, TEXT-SCRAMBLE NAV, COUNTDOWN, PRELOADER & GSAP/LENIS
+       ========================================================================== */
+    function initMicroInteractions() {
+      // Text scramble on nav hover
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      document.querySelectorAll('.scramble-link').forEach(link => {
+        const orig = link.textContent;
+        link.addEventListener('mouseenter', () => {
+          if (PREFERS_REDUCED_MOTION) return;
+          let iter = 0;
+          const iv = setInterval(() => {
+            link.textContent = orig.split('').map((ch, idx) => idx < iter ? orig[idx] : chars[Math.floor(Math.random() * chars.length)]).join('');
+            iter += 0.5;
+            if (iter >= orig.length) { link.textContent = orig; clearInterval(iv); }
+          }, 26);
+        });
+      });
+
+      // Magnetic buttons
+      if (!PREFERS_REDUCED_MOTION && window.matchMedia('(hover: hover)').matches) {
+        document.querySelectorAll('.magnetic-btn').forEach(btn => {
+          btn.addEventListener('mousemove', (e) => {
+            const r = btn.getBoundingClientRect();
+            const dx = (e.clientX - (r.left + r.width / 2)) * 0.24;
+            const dy = (e.clientY - (r.top + r.height / 2)) * 0.24;
+            btn.style.transform = `translate(${dx}px, ${dy}px)`;
+          });
+          btn.addEventListener('mouseleave', () => { btn.style.transform = 'translate(0,0)'; });
+        });
+      }
+
+      // Live Countdown Timer (3 days + 14 hrs rolling)
+      const targetTime = Date.now() + (3 * 86400 + 14 * 3600 + 42 * 60 + 19) * 1000;
+      const updateCD = () => {
+        const diff = Math.max(0, targetTime - Date.now());
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff % 86400000) / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+        document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
+        document.getElementById('cd-hrs').textContent = String(h).padStart(2, '0');
+        document.getElementById('cd-min').textContent = String(m).padStart(2, '0');
+        document.getElementById('cd-sec').textContent = String(s).padStart(2, '0');
+      };
+      updateCD();
+      setInterval(updateCD, 1000);
+    }
+
+    function runPreloaderAndAnimations() {
+      const preloader = document.getElementById('preloader');
+      const countEl = document.getElementById('preloader-count');
+
+      if (PREFERS_REDUCED_MOTION || typeof gsap === 'undefined') {
+        preloader.style.display = 'none';
+        return;
+      }
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Smooth Scroll via Lenis
+      if (typeof Lenis !== 'undefined') {
+        const lenis = new Lenis({ duration: 1.15, smoothWheel: true });
+        lenis.on('scroll', (e) => {
+          globalScrollVel = e.velocity || 0;
+          ScrollTrigger.update();
+        });
+        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+      }
+
+      // Preloader timeline
+      const obj = { val: 0 };
+      const tl = gsap.timeline();
+      tl.to('.preloader-logo span', { y: 0, stagger: 0.045, duration: 0.65, ease: 'power4.out' })
+        .to(obj, {
+          val: 100,
+          duration: 1.05,
+          ease: 'power2.inOut',
+          onUpdate: () => { countEl.textContent = String(Math.round(obj.val)).padStart(3, '0'); }
+        }, 0.1)
+        .to('#preloader-curtain', { y: '0%', duration: 0.45, ease: 'power3.inOut' })
+        .to('#preloader', { y: '-100%', duration: 0.65, ease: 'power4.inOut', onComplete: () => { preloader.style.display = 'none'; } })
+        .from('.reveal-hero', { y: 36, opacity: 0, stagger: 0.1, duration: 0.85, ease: 'power3.out' }, '-=0.35');
+
+      // Section scroll reveals
+      gsap.utils.toArray('.section-title').forEach(el => {
+        gsap.from(el, {
+          y: 36,
+          opacity: 0,
+          duration: 0.85,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 86%', once: true }
+        });
+      });
+
+      gsap.utils.toArray('.collection-media img').forEach(img => {
+        gsap.fromTo(img,
+          { clipPath: 'inset(12% 0% 12% 0%)', scale: 1.12 },
+          {
+            clipPath: 'inset(0% 0% 0% 0%)',
+            scale: 1,
+            duration: 1.0,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: img, start: 'top 82%', once: true }
+          }
+        );
+      });
+    }
+
+    /* ==========================================================================
+       OVERLAYS, MEGA-MENU, LOOKBOOK HOTSPOTS & EVENT WIRING
+       ========================================================================== */
+    function openDrawer(id) {
+      closeAllOverlays();
+      document.getElementById('drawer-backdrop').classList.add('is-open');
+      document.getElementById(id).classList.add('is-open');
+      document.body.classList.add('no-scroll');
+    }
+
+    function closeAllOverlays() {
+      qv3D.active = false;
+      document.getElementById('drawer-backdrop').classList.remove('is-open');
+      document.getElementById('cart-drawer').classList.remove('is-open');
+      document.getElementById('wishlist-drawer').classList.remove('is-open');
+      document.getElementById('search-overlay').classList.remove('is-open');
+      document.getElementById('qv-modal').classList.remove('is-open');
+      document.getElementById('mobile-drawer').classList.remove('is-open');
+      document.getElementById('lookbook-popover').classList.remove('is-open');
+      document.body.classList.remove('no-scroll');
+    }
+
+    function applyCategoryJump(catName) {
+      state.shopFilters.categories = [catName];
+      state.shopFilters.limit = 12;
+      document.querySelectorAll('.cat-filter-cb').forEach(cb => {
+        cb.checked = cb.value === catName;
+      });
+      renderShopCatalog();
+      document.getElementById('shop').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function initEventListeners() {
+      // Mega menu hover
+      const triggerWrap = document.getElementById('mega-trigger-wrap');
+      const megaMenu = document.getElementById('mega-menu');
+      let megaTimer;
+      const showMega = () => { clearTimeout(megaTimer); megaMenu.classList.add('is-open'); };
+      const hideMega = () => { megaTimer = setTimeout(() => megaMenu.classList.remove('is-open'), 180); };
+      triggerWrap.addEventListener('mouseenter', showMega);
+      triggerWrap.addEventListener('mouseleave', hideMega);
+      megaMenu.addEventListener('mouseenter', showMega);
+      megaMenu.addEventListener('mouseleave', hideMega);
+
+      // Mega menu & Collection filter links
+      document.querySelectorAll('[data-mega-filter], [data-collection-filter]').forEach(a => {
+        a.addEventListener('click', (e) => {
+          const val = a.dataset.megaFilter || a.dataset.collectionFilter;
+          megaMenu.classList.remove('is-open');
+          if (val) {
+            e.preventDefault();
+            applyCategoryJump(val);
+          }
+        });
+      });
+
+      // Drawers & Overlays
+      document.getElementById('open-cart-btn').addEventListener('click', () => openDrawer('cart-drawer'));
+      document.getElementById('open-wishlist-btn').addEventListener('click', () => openDrawer('wishlist-drawer'));
+      document.getElementById('close-cart-btn').addEventListener('click', closeAllOverlays);
+      document.getElementById('close-wishlist-btn').addEventListener('click', closeAllOverlays);
+      document.getElementById('drawer-backdrop').addEventListener('click', closeAllOverlays);
+      document.getElementById('close-qv-btn').addEventListener('click', closeAllOverlays);
+      document.getElementById('qv-modal').addEventListener('click', (e) => { if (e.target.id === 'qv-modal') closeAllOverlays(); });
+
+      // Mobile menu
+      document.getElementById('open-mobile-btn').addEventListener('click', () => {
+        document.getElementById('mobile-drawer').classList.add('is-open');
+        document.body.classList.add('no-scroll');
+      });
+      document.getElementById('close-mobile-btn').addEventListener('click', closeAllOverlays);
+      document.querySelectorAll('.mobile-nav-link').forEach(l => l.addEventListener('click', closeAllOverlays));
+
+      // Search overlay
+      const searchOverlay = document.getElementById('search-overlay');
+      const searchInput = document.getElementById('search-input');
+      const searchGrid = document.getElementById('search-results-grid');
+
+      const runSearch = (q) => {
+        const term = q.trim().toLowerCase();
+        const matches = term
+          ? PRODUCTS.filter(p => p.name.toLowerCase().includes(term) || p.category.toLowerCase().includes(term) || p.description.toLowerCase().includes(term))
+          : PRODUCTS.slice(0, 6);
+        searchGrid.innerHTML = matches.length ? matches.map(p => `
+          <div style="background:var(--ink);border:1px solid var(--hairline-white);padding:12px;display:flex;gap:12px;align-items:center;">
+            <img src="${p.image}" alt="${p.name}" style="width:64px;height:84px;object-fit:cover;" />
+            <div style="flex:1;">
+              <div style="font-size:0.88rem;font-weight:500;">${p.name}</div>
+              <div class="font-mono text-gold-foil" style="font-size:0.82rem;margin:4px 0 8px;">${formatPrice(p.price)}</div>
+              <div style="display:flex;gap:8px;">
+                <button type="button" class="quick-add-btn" style="padding:5px 8px;width:auto;" data-search-qv="${p.id}">3D View</button>
+                <button type="button" class="size-filter-btn" data-search-add="${p.id}">+ Bag</button>
+              </div>
+            </div>
+          </div>
+        `).join('') : `<p class="font-mono" style="color:rgba(245,242,236,0.6);">No pieces found for "${q}".</p>`;
+      };
+
+      document.getElementById('open-search-btn').addEventListener('click', () => {
+        closeAllOverlays();
+        searchOverlay.classList.add('is-open');
+        document.body.classList.add('no-scroll');
+        runSearch(searchInput.value);
+        setTimeout(() => searchInput.focus(), 120);
+      });
+      document.getElementById('close-search-btn').addEventListener('click', closeAllOverlays);
+      searchInput.addEventListener('input', (e) => runSearch(e.target.value));
+
+      searchGrid.addEventListener('click', (e) => {
+        const qvBtn = e.target.closest('[data-search-qv]');
+        const addBtn = e.target.closest('[data-search-add]');
+        if (qvBtn) { closeAllOverlays(); openQuickView(qvBtn.dataset.searchQv); }
+        if (addBtn) { addToCart(addBtn.dataset.searchAdd, 'M'); }
+      });
+
+      // ESC key closes everything
+      window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAllOverlays(); });
+
+      // New Arrivals filter tabs
+      document.getElementById('arrivals-tabs').addEventListener('click', (e) => {
+        const btn = e.target.closest('.filter-tab');
+        if (!btn) return;
+        state.arrivalsTab = btn.dataset.tab;
+        document.querySelectorAll('#arrivals-tabs .filter-tab').forEach(b => {
+          b.classList.toggle('is-active', b === btn);
+          b.setAttribute('aria-selected', String(b === btn));
+        });
+        renderNewArrivals();
+      });
+
+      // Shop Sidebar Filters
+      document.getElementById('filter-categories').addEventListener('change', () => {
+        state.shopFilters.categories = [...document.querySelectorAll('.cat-filter-cb:checked')].map(c => c.value);
+        renderShopCatalog();
+      });
+      document.getElementById('filter-sizes').addEventListener('click', (e) => {
+        const btn = e.target.closest('.size-filter-btn');
+        if (!btn) return;
+        const s = btn.dataset.size;
+        state.shopFilters.size = state.shopFilters.size === s ? null : s;
+        document.querySelectorAll('#filter-sizes .size-filter-btn').forEach(b => b.classList.toggle('is-active', b.dataset.size === state.shopFilters.size));
+        renderShopCatalog();
+      });
+      document.getElementById('filter-colors').addEventListener('click', (e) => {
+        const btn = e.target.closest('.color-filter-btn');
+        if (!btn) return;
+        const c = btn.dataset.color;
+        state.shopFilters.color = state.shopFilters.color === c ? null : c;
+        document.querySelectorAll('#filter-colors .color-filter-btn').forEach(b => b.classList.toggle('is-active', b.dataset.color === state.shopFilters.color));
+        renderShopCatalog();
+      });
+      document.getElementById('filter-price').addEventListener('input', (e) => {
+        state.shopFilters.maxPrice = Number(e.target.value);
+        document.getElementById('price-max-label').textContent = `${CURRENCY}${e.target.value}`;
+        renderShopCatalog();
+      });
+      document.getElementById('shop-sort').addEventListener('change', (e) => {
+        state.shopFilters.sort = e.target.value;
+        renderShopCatalog();
+      });
+      document.getElementById('view-grid-btn').addEventListener('click', () => {
+        state.shopFilters.view = 'grid';
+        document.getElementById('view-grid-btn').classList.add('is-active');
+        document.getElementById('view-list-btn').classList.remove('is-active');
+        renderShopCatalog();
+      });
+      document.getElementById('view-list-btn').addEventListener('click', () => {
+        state.shopFilters.view = 'list';
+        document.getElementById('view-list-btn').classList.add('is-active');
+        document.getElementById('view-grid-btn').classList.remove('is-active');
+        renderShopCatalog();
+      });
+      document.getElementById('load-more-btn').addEventListener('click', () => {
+        state.shopFilters.limit += 9;
+        renderShopCatalog();
+      });
+      document.getElementById('reset-filters-btn').addEventListener('click', () => {
+        state.shopFilters = { categories: [], size: null, color: null, maxPrice: 450, sort: 'featured', view: state.shopFilters.view, limit: 9 };
+        document.querySelectorAll('.cat-filter-cb').forEach(c => c.checked = false);
+        document.querySelectorAll('#filter-sizes .size-filter-btn, #filter-colors .color-filter-btn').forEach(b => b.classList.remove('is-active'));
+        document.getElementById('filter-price').value = 450;
+        document.getElementById('price-max-label').textContent = `${CURRENCY}450`;
+        document.getElementById('shop-sort').value = 'featured';
+        renderShopCatalog();
+      });
+
+      // Global delegated click handler for product cards, cart, wishlist, categories, hotspots
+      document.addEventListener('click', (e) => {
+        const catJump = e.target.closest('[data-cat-jump]');
+        if (catJump) { applyCategoryJump(catJump.dataset.catJump); return; }
+
+        const sizeChip = e.target.closest('.size-chip-mini');
+        if (sizeChip) {
+          sizeChip.parentElement.querySelectorAll('.size-chip-mini').forEach(b => b.classList.remove('is-selected'));
+          sizeChip.classList.add('is-selected');
+          return;
+        }
+
+        const quickAdd = e.target.closest('[data-quick-add]');
+        if (quickAdd) {
+          const card = quickAdd.closest('.product-card');
+          const sel = card ? card.querySelector('.size-chip-mini.is-selected') : null;
+          addToCart(quickAdd.dataset.quickAdd, sel ? sel.dataset.size : 'M');
+          return;
+        }
+
+        const wishBtn = e.target.closest('[data-wish-id]');
+        if (wishBtn) { toggleWishlist(wishBtn.dataset.wishId); return; }
+
+        const qvTrigger = e.target.closest('[data-qv-trigger]');
+        if (qvTrigger && !e.target.closest('.wishlist-btn') && (!e.target.closest('.product-hover-bar') || e.target.closest('.inspect-3d-btn'))) {
+          openQuickView(qvTrigger.dataset.qvTrigger);
+          return;
+        }
+
+        const cartQty = e.target.closest('[data-cart-qty]');
+        if (cartQty) {
+          const [id, size, delta] = cartQty.dataset.cartQty.split('|');
+          updateCartQty(Number(id), size, Number(delta));
+          return;
+        }
+
+        const cartRem = e.target.closest('[data-cart-remove]');
+        if (cartRem) {
+          const [id, size] = cartRem.dataset.cartRemove.split('|');
+          updateCartQty(Number(id), size, -999);
+          return;
+        }
+
+        const moveBag = e.target.closest('[data-move-bag]');
+        if (moveBag) {
+          addToCart(moveBag.dataset.moveBag, 'M');
+          openDrawer('cart-drawer');
+          return;
+        }
+
+        // Lookbook Hotspot Popover
+        const hotspot = e.target.closest('.hotspot-dot');
+        const popover = document.getElementById('lookbook-popover');
+        if (hotspot) {
+          const p = PRODUCTS.find(prod => prod.id === Number(hotspot.dataset.productId));
+          if (!p) return;
+          popover.innerHTML = `
+            <div style="display:flex;gap:12px;align-items:center;">
+              <img src="${p.image}" alt="${p.name}" style="width:72px;height:96px;object-fit:cover;border:1px solid var(--hairline-white);" />
+              <div style="flex:1;">
+                <div style="font-size:0.86rem;font-weight:500;">${p.name}</div>
+                <div class="font-mono text-gold-foil" style="font-size:0.9rem;margin:4px 0 8px;">${formatPrice(p.price)}</div>
+                <div style="display:flex;gap:4px;margin-bottom:8px;">
+                  ${p.sizes.slice(0, 4).map((s, i) => `<button type="button" class="size-chip-mini ${i === 1 ? 'is-selected' : ''}" data-size="${s}">${s}</button>`).join('')}
+                </div>
+                <button type="button" class="quick-add-btn" id="popover-add-btn">Add to Bag +</button>
+              </div>
+            </div>
+          `;
+          const rect = hotspot.getBoundingClientRect();
+          const left = Math.min(window.innerWidth - 326, Math.max(16, rect.left - 140));
+          const top = Math.min(window.innerHeight - 190, Math.max(84, rect.top + 22));
+          popover.style.left = `${left}px`;
+          popover.style.top = `${top}px`;
+          popover.classList.add('is-open');
+
+          document.getElementById('popover-add-btn').onclick = () => {
+            const sel = popover.querySelector('.size-chip-mini.is-selected');
+            addToCart(p.id, sel ? sel.dataset.size : 'M');
+            popover.classList.remove('is-open');
+          };
+          return;
+        } else if (popover.classList.contains('is-open') && !e.target.closest('#lookbook-popover')) {
+          popover.classList.remove('is-open');
+        }
+      });
+
+      // Coupon copy & cart apply
+      document.getElementById('copy-coupon-btn').addEventListener('click', () => copyTextToClipboard('BLOODMOON'));
+      document.getElementById('apply-coupon-btn').addEventListener('click', () => {
+        const val = document.getElementById('cart-coupon-input').value.trim().toUpperCase();
+        if (val === 'BLOODMOON') {
+          state.couponApplied = true;
+          saveState();
+          updateCartUI();
+          showToast('CODE <strong>BLOODMOON</strong> APPLIED — 20% OFF!');
+        } else {
+          showToast('INVALID CODE. TRY <strong>BLOODMOON</strong>');
+        }
+      });
+
+      document.getElementById('checkout-btn').addEventListener('click', () => {
+        if (!state.cart.length) { showToast('YOUR BAG IS EMPTY'); return; }
+        showToast('&#10022; REDIRECTING TO NOCTURNE ENCRYPTED CHECKOUT...');
+      });
+
+      // Newsletter signup
+      document.getElementById('newsletter-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        document.getElementById('newsletter-email').value = '';
+        document.getElementById('newsletter-success').classList.add('is-visible');
+        showToast('&#10022; WELCOME TO THE COVEN — 10% OFF UNLOCKED');
+      });
+
+      // Back to top
+      document.getElementById('back-to-top-btn').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    /* ==========================================================================
+       BOOTSTRAP ON WINDOW LOAD
+       ========================================================================== */
+    window.addEventListener('load', () => {
+      renderCategories();
+      renderNewArrivals();
+      renderBestSellers();
+      renderReviews();
+      renderShopSidebarCategories();
+      renderShopCatalog();
+      updateCartUI();
+      updateWishlistUI();
+
+      initEventListeners();
+      initQuickView3DStudio();
+      initBestSellerCarousel();
+      initMicroInteractions();
+      initHeroWebGL();
+      initHeroParticles();
+      initOffer3DRing();
+      initCustomCursor();
+      runPreloaderAndAnimations();
+    });
+  </script>
+</body>
+</html>
